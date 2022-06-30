@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   const intl = useIntl();
   const defaultMessage = intl.formatMessage({
     id: 'app.copyright.produced',
-    defaultMessage: '蚂蚁集团体验技术部出品',
+    defaultMessage: 'TianGongLCA R&D Team',
   });
 
   const currentYear = new Date().getFullYear();
@@ -16,24 +16,24 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright={`${currentYear} ${defaultMessage}`}
+      copyright={`2021-${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
+          key: 'NGO',
+          title: 'NGO',
+          href: 'https://www.tiangong.earth/',
+          blankTarget: true,
+        },
+        {
+          key: 'TianGongLCA R&D Team',
+          title: 'TianGongLCA R&D Team',
+          href: 'https://www.tiangong.earth/team',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
-          blankTarget: true,
-        },
-        {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
+          href: 'https://github.com/linancn/TianGong-Footprint',
           blankTarget: true,
         },
       ]}

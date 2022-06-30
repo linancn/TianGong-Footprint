@@ -1,15 +1,15 @@
 // https://umijs.org/config/
 import { defineConfig } from '@umijs/max';
-import { join } from 'path';
+// import { join } from 'path';
 import defaultSettings from './defaultSettings';
-import proxy from './proxy';
 import routes from './routes';
-
-const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
   hash: true,
-  antd: {},
+  antd: {
+    dark: true, // 开启暗色主题
+    compact: true, // 开启紧凑主题
+  },
   request: {},
   initialState: {},
   model: {},
@@ -22,7 +22,7 @@ export default defineConfig({
   // https://umijs.org/zh-CN/plugins/plugin-locale
   locale: {
     // default zh-CN
-    default: 'zh-CN',
+    default: 'en-US',
     antd: true,
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
@@ -40,27 +40,14 @@ export default defineConfig({
     // 只有设置为 variable， 才能使用 configProvide 动态设置主色调
     // https://ant.design/docs/react/customize-theme-variable-cn
     'root-entry-name': 'variable',
+    'primary-color': defaultSettings.primaryColor,
   },
   ignoreMomentLocale: true,
-  proxy: proxy[REACT_APP_ENV || 'dev'],
+  // proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
   },
   // Fast Refresh 热更新
   fastRefresh: true,
   presets: ['umi-presets-pro'],
-  openAPI: [
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      // 或者使用在线的版本
-      // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
-      schemaPath: join(__dirname, 'oneapi.json'),
-      mock: false,
-    },
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
-    },
-  ],
 });

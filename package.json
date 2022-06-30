@@ -17,7 +17,6 @@
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src ",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
-    "openapi": "max openapi",
     "playwright": "playwright install && playwright test",
     "prepare": "husky install",
     "prettier": "prettier -c --write \"src/**/*\"",
@@ -34,12 +33,18 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@ant-design/pro-components": "1.1.1",
+    "@ant-design/pro-components": "^1.1.6",
     "@umijs/route-utils": "^2.0.0",
     "antd": "^4.20.0",
     "classnames": "^2.3.0",
@@ -66,7 +71,6 @@
     "@types/react-helmet": "^6.1.0",
     "@umijs/fabric": "^2.11.1",
     "@umijs/max": "^4.0.0-rc.22",
-    "@umijs/openapi": "^1.3.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.3.0",
     "detect-installer": "^1.0.0",
@@ -82,5 +86,7 @@
     "umi-presets-pro": "^1.0.1",
     "umi-serve": "^1.9.10"
   },
-  "engines": { "node": ">=12.0.0" }
+  "engines": {
+    "node": ">=12.0.0"
+  }
 }
