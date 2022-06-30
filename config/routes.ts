@@ -2,8 +2,12 @@
   {
     path: '/welcome',
     name: 'welcome',
-    icon: 'smile',
     component: './Welcome',
+  },
+  {
+    path: '/calculator',
+    name: 'calculator',
+    component: './calculator/index',
   },
   {
     path: '/',
