@@ -1,0 +1,109 @@
+import type { ProColumns } from '@ant-design/pro-components';
+import { EditableProTable } from '@ant-design/pro-components';
+import React, { useState } from 'react';
+
+type DataSourceType = {
+  id: React.Key;
+  partName?: string;
+  materialCategory?: string;
+  subcategory?: string;
+  quality?: string;
+  weight?: number;
+  suppliterLocation?: string;
+  transportMode?: string;
+  children?: DataSourceType[];
+};
+const defaultData: DataSourceType[] = [];
+
+const Packaging = () => {
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
+    defaultData.map((item) => item.id),
+  );
+  const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
+
+  const columns: ProColumns<DataSourceType>[] = [
+    {
+      title: 'PART NAME',
+      dataIndex: 'partName',
+      valueType: 'text',
+    },
+    {
+      title: 'MATERIAL CATEGORY',
+      dataIndex: 'materialCategory',
+      valueType: 'text',
+    },
+    {
+      title: 'SUBCATEGORY',
+      dataIndex: 'subcategory',
+      valueType: 'text',
+    },
+    {
+      title: 'QUALITY',
+      dataIndex: 'quality',
+      valueType: 'text',
+    },
+    {
+      title: 'WEIGHT',
+      dataIndex: 'weight',
+      valueType: 'digit',
+    },
+    {
+      title: 'SUPPLIER LOCATION',
+      dataIndex: 'suppliterLocation',
+      valueType: 'text',
+    },
+    {
+      title: 'TRANSPORT MODE',
+      dataIndex: 'transportMode',
+      valueType: 'text',
+    },
+    {
+      title: 'Options',
+      valueType: 'option',
+      render: (_, row) => [
+        <a
+          key="delete"
+          onClick={() => {
+            setDataSource(dataSource.filter((item) => item.id !== row.id));
+          }}
+        >
+          delete
+        </a>,
+      ],
+    },
+  ];
+
+  return (
+    <>
+      <EditableProTable<DataSourceType>
+        rowKey="id"
+        recordCreatorProps={{
+          newRecordType: 'dataSource',
+          record: () => ({
+            id: Date.now(),
+          }),
+        }}
+        // headerTitle="可编辑表格"
+        scroll={{
+          x: true,
+        }}
+        columns={columns}
+        value={dataSource}
+        onChange={setDataSource}
+        editable={{
+          type: 'multiple',
+          editableKeys,
+          actionRender: (row, config, defaultDoms) => {
+            return [defaultDoms.delete];
+          },
+          onValuesChange: (record, recordList) => {
+            setDataSource(recordList);
+          },
+          onChange: setEditableRowKeys,
+        }}
+      />
+    </>
+  );
+};
+
+export default Packaging;
