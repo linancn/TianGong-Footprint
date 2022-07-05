@@ -8,14 +8,14 @@ const Product = () => {
         label="PRODUCT NAME"
         width="md"
         placeholder="Enter name"
-        rules={[{ required: true }]}
+        // rules={[{ required: true }]}
       />
       <ProFormDigit
         width="md"
         name="weight"
         label="TOTAL PRODUCT WEIGHT"
         placeholder="0"
-        rules={[{ required: true }]}
+        // rules={[{ required: true }]}
       />
       <ProFormSelect
         width="md"

@@ -10,12 +10,10 @@ type DataSourceType = {
   brand?: string;
   model?: string;
 };
-const defaultData: DataSourceType[] = [];
+// const defaultData: DataSourceType[] = [];
 
 const Engery = () => {
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
-    defaultData.map((item) => item.id),
-  );
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
 
   const columns: ProColumns<DataSourceType>[] = [
@@ -27,7 +25,11 @@ const Engery = () => {
     {
       title: 'ENERGY SOURCE',
       dataIndex: 'engerySource',
-      valueType: 'text',
+      valueType: 'select',
+      valueEnum: {
+        multiple: { text: 'a' },
+        radio: { text: 'b' },
+      },
     },
     {
       title: 'TOTAL ENERGY CONSUMED',
@@ -42,7 +44,11 @@ const Engery = () => {
     {
       title: 'MODE OF TRANSPORT',
       dataIndex: 'model',
-      valueType: 'text',
+      valueType: 'select',
+      valueEnum: {
+        multiple: { text: 'a' },
+        radio: { text: 'b' },
+      },
     },
   ];
 
@@ -60,6 +66,7 @@ const Engery = () => {
         scroll={{
           x: true,
         }}
+        controlled
         columns={columns}
         value={dataSource}
         onChange={setDataSource}

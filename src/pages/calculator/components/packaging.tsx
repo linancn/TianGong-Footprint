@@ -11,14 +11,11 @@ type DataSourceType = {
   weight?: number;
   suppliterLocation?: string;
   transportMode?: string;
-  children?: DataSourceType[];
 };
-const defaultData: DataSourceType[] = [];
+// const defaultData: DataSourceType[] = [];
 
 const Packaging = () => {
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
-    defaultData.map((item) => item.id),
-  );
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
 
   const columns: ProColumns<DataSourceType>[] = [
@@ -30,17 +27,29 @@ const Packaging = () => {
     {
       title: 'MATERIAL CATEGORY',
       dataIndex: 'materialCategory',
-      valueType: 'text',
+      valueType: 'select',
+      valueEnum: {
+        multiple: { text: 'a' },
+        radio: { text: 'b' },
+      },
     },
     {
       title: 'SUBCATEGORY',
       dataIndex: 'subcategory',
-      valueType: 'text',
+      valueType: 'select',
+      valueEnum: {
+        multiple: { text: 'a' },
+        radio: { text: 'b' },
+      },
     },
     {
       title: 'QUALITY',
       dataIndex: 'quality',
-      valueType: 'text',
+      valueType: 'select',
+      valueEnum: {
+        multiple: { text: 'a' },
+        radio: { text: 'b' },
+      },
     },
     {
       title: 'WEIGHT',
@@ -55,7 +64,11 @@ const Packaging = () => {
     {
       title: 'TRANSPORT MODE',
       dataIndex: 'transportMode',
-      valueType: 'text',
+      valueType: 'select',
+      valueEnum: {
+        multiple: { text: 'a' },
+        radio: { text: 'b' },
+      },
     },
     {
       title: 'Options',
@@ -87,6 +100,7 @@ const Packaging = () => {
         scroll={{
           x: true,
         }}
+        controlled
         columns={columns}
         value={dataSource}
         onChange={setDataSource}
