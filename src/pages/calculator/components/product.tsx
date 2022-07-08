@@ -1,10 +1,10 @@
-import { ProFormDigit, ProFormSelect, ProFormText } from '@ant-design/pro-components';
+import { ProFormDigit, ProFormText } from '@ant-design/pro-components';
 
 const Product = () => {
   return (
     <>
       <ProFormText
-        name="name"
+        name="projectName"
         label="PRODUCT NAME"
         width="md"
         placeholder="Enter name"
@@ -12,23 +12,17 @@ const Product = () => {
       />
       <ProFormDigit
         width="md"
-        name="weight"
+        name="totalProductWeignt"
         label="TOTAL PRODUCT WEIGHT"
         placeholder="0"
         // rules={[{ required: true }]}
       />
-      <ProFormSelect
-        width="md"
-        fieldProps={{
-          labelInValue: true,
-        }}
-        request={async () => [
-          { label: 'category1', value: 'category1' },
-          { label: 'category2', value: 'category2' },
-        ]}
-        name="category"
+      <ProFormText
+        name="projectCategory"
         label="PRODUCT CATEGORY"
-        placeholder="Category"
+        width="md"
+        placeholder="Enter name"
+        // rules={[{ required: true }]}
       />
     </>
   );

@@ -10,6 +10,7 @@ export type Supply = {
 };
 
 export type Processing = {
+  supplyid?: number;
   id: number;
   materialCategory?: string;
   materialType?: string;

@@ -1,14 +1,10 @@
-import type { Processing, Project, Supply } from '@/services/data';
-import {
-  EditableProTable,
-  ProCard,
-  ProColumns,
-  ProFormDigit,
-  ProFormInstance,
-  ProFormText,
-  StepsForm,
-} from '@ant-design/pro-components';
-import React, { useEffect, useRef, useState } from 'react';
+import type { Project } from '@/services/data';
+import type { ProFormInstance } from '@ant-design/pro-components';
+import { ProCard, StepsForm } from '@ant-design/pro-components';
+import React, { useEffect, useRef } from 'react';
+import Engery from './components/engery';
+import Parts from './components/parts';
+import Product from './components/product';
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -24,13 +20,13 @@ const formValue: Project = {
   supply: [
     {
       id: 1,
-      material: 'sss',
+      material: '',
       materialCategory: '',
       materialType: '',
       packaging: '',
       totalMass: 0,
-      processing: [{ id: 1, materialCategory: '', materialType: '', processCategory: '' }],
-      tansportation: [{ id: 1, supplierPercentage: '', supplierLocation: '', transportMode: '' }],
+      processing: [],
+      tansportation: [],
     },
   ],
   location: '',
@@ -49,117 +45,6 @@ export default () => {
       });
     });
   }, []);
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
-    formValue.supply.map((item) => item.id),
-  );
-
-  const expandedRowRender = (record: any) => {
-    const Processingcolumns: ProColumns<Processing>[] = [
-      {
-        title: 'Processing',
-        dataIndex: 'id',
-        valueType: 'text',
-        // key: 'id',
-      },
-      {
-        title: 'Material Category',
-        dataIndex: 'materialCategory',
-        // key: 'materialCategory',
-        valueType: 'text',
-      },
-      {
-        title: 'Material Type',
-        dataIndex: 'materialType',
-        // key: 'materialType',
-        valueType: 'text',
-      },
-      {
-        title: 'Process Category',
-        dataIndex: 'processCategory',
-        // key: 'processCategory',
-        valueType: 'text',
-      },
-    ];
-    return (
-      <>
-        <EditableProTable<Processing>
-          rowKey="id"
-          recordCreatorProps={{
-            newRecordType: 'dataSource',
-            record: () => ({
-              id: Date.now(),
-            }),
-          }}
-          // headerTitle="可编辑表格"
-          scroll={{
-            x: true,
-          }}
-          controlled
-          columns={Processingcolumns}
-          // name="processing"
-          value={record.processing}
-          // onChange={setDataSource}
-          editable={{
-            type: 'multiple',
-            editableKeys,
-            actionRender: (row, config, defaultDoms) => {
-              return [defaultDoms.delete];
-            },
-            // onValuesChange: (record, recordList) => {
-            //   // setDataSource(recordList);
-            //   console.log(record);
-            //   console.log(recordList);
-            // },
-            onChange: setEditableRowKeys,
-          }}
-        />
-      </>
-    );
-  };
-
-  const columns: ProColumns<Supply>[] = [
-    {
-      title: 'Material',
-      dataIndex: 'material',
-      valueType: 'text',
-    },
-
-    {
-      title: 'Material Category',
-      dataIndex: 'materialCategory',
-      valueType: 'text',
-    },
-    {
-      title: 'Material Type',
-      dataIndex: 'materialType',
-      valueType: 'text',
-    },
-    {
-      title: 'Packaging',
-      dataIndex: 'packaging',
-      valueType: 'text',
-    },
-    {
-      title: 'totalMass',
-      dataIndex: 'totalMass',
-      valueType: 'text',
-    },
-    {
-      title: 'Action',
-      key: 'operation',
-      render: (_: any, row: any) => [
-        <a
-          key="delete"
-          onClick={() => {
-            console.log(row);
-            // setDataSource(dataSource.filter((item) => item.key !== row.id));
-          }}
-        >
-          delete
-        </a>,
-      ],
-    },
-  ];
 
   return (
     <ProCard>
@@ -176,73 +61,13 @@ export default () => {
         }}
       >
         <StepsForm.StepForm name="step1" title="Product">
-          <ProFormText
-            name="projectName"
-            label="PRODUCT NAME"
-            width="md"
-            placeholder="Enter name"
-            // rules={[{ required: true }]}
-          />
-          <ProFormDigit
-            width="md"
-            name="totalProductWeignt"
-            label="TOTAL PRODUCT WEIGHT"
-            placeholder="0"
-            // rules={[{ required: true }]}
-          />
-          <ProFormText
-            name="projectCategory"
-            label="PRODUCT CATEGORY"
-            width="md"
-            placeholder="Enter name"
-            // rules={[{ required: true }]}
-          />
+          <Product />
         </StepsForm.StepForm>
         <StepsForm.StepForm name="step2" title="Upstream supply">
-          <EditableProTable<Supply>
-            rowKey="id"
-            recordCreatorProps={{
-              newRecordType: 'dataSource',
-              record: () => ({
-                id: Date.now(),
-              }),
-            }}
-            // headerTitle="可编辑表格"
-            scroll={{
-              x: true,
-            }}
-            controlled
-            columns={columns}
-            name="supply"
-            value={formValue.supply}
-            // onChange={setDataSource}
-            editable={{
-              type: 'multiple',
-              editableKeys,
-              actionRender: (row, config, defaultDoms) => {
-                return [defaultDoms.delete];
-              },
-              // onValuesChange: (record, recordList) => {
-              //   // setDataSource(recordList);
-              // },
-              onChange: setEditableRowKeys,
-            }}
-            expandable={{
-              expandedRowRender,
-              defaultExpandedRowKeys: ['0'],
-            }}
-          />
+          <Parts supply={formValue.supply} />
         </StepsForm.StepForm>
         <StepsForm.StepForm name="step3" title="On site">
-          <ProFormText name="location" label="Location" width="md" placeholder="Enter name" />
-          <ProFormText
-            name="electricitySource"
-            label="Electricity Source"
-            width="md"
-            placeholder="Enter name"
-          />
-          <ProFormDigit width="md" name="electricity" label="Electricity" placeholder="0" />
-          <ProFormText name="ratio" label="Ratio" width="md" placeholder="Enter name" />
+          <Engery />
         </StepsForm.StepForm>
       </StepsForm>
     </ProCard>
