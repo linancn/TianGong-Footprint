@@ -2,6 +2,7 @@ import type { Project } from '@/services/data';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProCard, StepsForm } from '@ant-design/pro-components';
 import React, { useEffect, useRef } from 'react';
+import Distribution from './components/distrbution';
 import Engery from './components/engery';
 import Parts from './components/parts';
 import Product from './components/product';
@@ -26,13 +27,14 @@ const formValue: Project = {
       packaging: '',
       totalMass: 0,
       processing: [],
-      tansportation: [],
+      transportation: [],
     },
   ],
   location: '',
   electricitySource: '',
   electricity: 0,
   ratio: '',
+  destination: [],
 };
 
 export default () => {
@@ -50,7 +52,7 @@ export default () => {
     <ProCard>
       <StepsForm
         formMapRef={formMapRef}
-        onFinish={(values) => {
+        onFinish={(values: Project) => {
           console.log(values);
           return Promise.resolve(true);
         }}
@@ -64,10 +66,13 @@ export default () => {
           <Product />
         </StepsForm.StepForm>
         <StepsForm.StepForm name="step2" title="Upstream supply">
-          <Parts supply={formValue.supply} />
+          <Parts supply={formValue.supply} parentformRef={formMapRef} />
         </StepsForm.StepForm>
         <StepsForm.StepForm name="step3" title="On site">
           <Engery />
+        </StepsForm.StepForm>
+        <StepsForm.StepForm name="step4" title="Distribution">
+          <Distribution destination={formValue.destination} />
         </StepsForm.StepForm>
       </StepsForm>
     </ProCard>

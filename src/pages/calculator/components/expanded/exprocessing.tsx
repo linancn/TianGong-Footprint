@@ -1,13 +1,19 @@
 import type { Processing } from '@/services/data';
 import type { ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
+import type { FC } from 'react';
 import { useState } from 'react';
 
-const ExpandedRowRender = (supply: any) => {
+type Props = {
+  supplyid: number;
+  processing: any;
+  // parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
+};
+const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
-    supply.record.processing?.map((item: { id: any }) => item.id),
+    processing?.map((item: { id: any }) => item.id),
   );
-  const [dataSource, setDataSource] = useState<Processing[]>(() => supply.record.processing);
+  const [dataSource, setDataSource] = useState<Processing[]>(() => processing);
   const Processingcolumns: ProColumns<Processing>[] = [
     {
       title: 'Processing',
@@ -44,19 +50,25 @@ const ExpandedRowRender = (supply: any) => {
       ],
     },
   ];
+  const saveProcessing = (value: Processing[]) => {
+    // console.log(value);
+    // console.log(parentformRef.current[1]?.current?.getFieldsValue());
+    setDataSource(value);
+  };
+
   return (
     <>
       <EditableProTable<Processing>
         rowKey="id"
-        name={supply.record.id}
+        // name="process"
         recordCreatorProps={{
           newRecordType: 'dataSource',
           position: 'top',
           record: () => ({
             id: Date.now(),
-            materialCategory: 'ee',
+            materialCategory: '',
             materialType: '',
-            supplyid: supply.record.id,
+            supplyid: supplyid,
             processCategory: '',
           }),
         }}
@@ -66,7 +78,7 @@ const ExpandedRowRender = (supply: any) => {
         controlled
         columns={Processingcolumns}
         value={dataSource}
-        onChange={setDataSource}
+        onChange={saveProcessing}
         editable={{
           type: 'multiple',
           editableKeys,
@@ -78,4 +90,4 @@ const ExpandedRowRender = (supply: any) => {
   );
 };
 
-export default ExpandedRowRender;
+export default Exprocessing;

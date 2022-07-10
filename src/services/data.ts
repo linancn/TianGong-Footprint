@@ -6,7 +6,7 @@ export type Supply = {
   packaging?: string;
   totalMass?: number;
   processing?: Processing[];
-  tansportation?: Tansportation[];
+  transportation?: Transportation[];
 };
 
 export type Processing = {
@@ -16,12 +16,21 @@ export type Processing = {
   materialType?: string;
   processCategory?: string;
 };
-export type Tansportation = {
+export type Transportation = {
+  supplyid?: number;
   id: number;
   supplierPercentage?: string;
   supplierLocation?: string;
   transportMode?: string;
 };
+
+export type Destination = {
+  id: number;
+  destinationPercentage?: number;
+  destinationLocation?: string;
+  transportMode?: string;
+};
+
 export type Project = {
   projectName: string;
   totalProductWeignt: number;
@@ -31,4 +40,5 @@ export type Project = {
   electricitySource: string;
   electricity: number;
   ratio: string;
+  destination: Destination[];
 };

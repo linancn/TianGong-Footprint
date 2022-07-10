@@ -1,22 +1,27 @@
 import type { Supply } from '@/services/data';
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
+import type { FC } from 'react';
 import { useRef, useState } from 'react';
-import ExpandedRowRender from './expanded';
-
-const Parts = (supply: any) => {
+import Exprocessing from './expanded/exprocessing';
+import Extransportation from './expanded/extransportation';
+type Props = {
+  supply: any;
+  parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
+};
+const Parts: FC<Props> = ({ supply, parentformRef }) => {
+  const totalWeight = parentformRef.current[0]?.current?.getFieldValue('totalProductWeignt');
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
-    supply.supply.map((item: { id: any }) => item.id),
+    supply.map((item: { id: any }) => item.id),
   );
-  const [dataSource, setDataSource] = useState<Supply[]>(() => supply.supply);
-
   const expandedRowRender = (record: any) => {
     return (
       <>
-        <ExpandedRowRender record={record} />
+        <Exprocessing processing={record.processing} supplyid={record.id} />
+        <Extransportation transportation={record.transportation} supplyid={record.id} />
       </>
     );
   };
@@ -84,6 +89,7 @@ const Parts = (supply: any) => {
       >
         Supply
       </Button>
+      Total Product Weignt: {totalWeight}
       <EditableProTable<Supply>
         rowKey="id"
         actionRef={actionRef}
@@ -95,12 +101,12 @@ const Parts = (supply: any) => {
         controlled
         columns={columns}
         name="supply"
-        value={dataSource}
-        onChange={setDataSource}
+        value={supply}
+        // onChange={setDataSource}
         editable={{
           type: 'multiple',
           editableKeys,
-          actionRender: (row, config, dom) => [dom.cancel, dom.delete],
+          actionRender: (row, config, dom) => [dom.delete],
           onChange: setEditableRowKeys,
         }}
         expandable={{
