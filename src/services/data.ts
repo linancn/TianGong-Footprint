@@ -32,13 +32,13 @@ export type Destination = {
 };
 
 export type Project = {
-  projectName: string;
-  totalProductWeignt: number;
-  projectCategory: string;
-  supply: Supply[];
-  location: string;
-  electricitySource: string;
-  electricity: number;
-  ratio: string;
-  destination: Destination[];
+  projectName?: string;
+  totalProductWeignt?: number;
+  projectCategory?: string;
+  supply?: Supply[];
+  location?: string;
+  electricitySource?: string;
+  electricity?: number;
+  ratio?: string;
+  destination?: Destination[];
 };

@@ -1,6 +1,6 @@
 import type { Supply } from '@/services/data';
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns, ProFormInstance } from '@ant-design/pro-components';
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
@@ -9,10 +9,9 @@ import Exprocessing from './expanded/exprocessing';
 import Extransportation from './expanded/extransportation';
 type Props = {
   supply: any;
-  parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
+  // parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
 };
-const Parts: FC<Props> = ({ supply, parentformRef }) => {
-  const totalWeight = parentformRef.current[0]?.current?.getFieldValue('totalProductWeignt');
+const Parts: FC<Props> = ({ supply }) => {
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     supply.map((item: { id: any }) => item.id),
@@ -89,7 +88,6 @@ const Parts: FC<Props> = ({ supply, parentformRef }) => {
       >
         Supply
       </Button>
-      Total Product Weignt: {totalWeight}
       <EditableProTable<Supply>
         rowKey="id"
         actionRef={actionRef}
@@ -102,7 +100,6 @@ const Parts: FC<Props> = ({ supply, parentformRef }) => {
         columns={columns}
         name="supply"
         value={supply}
-        // onChange={setDataSource}
         editable={{
           type: 'multiple',
           editableKeys,

@@ -1,4 +1,4 @@
-import type { Project } from '@/services/data';
+import type { Project, Supply } from '@/services/data';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProCard, StepsForm } from '@ant-design/pro-components';
 import React, { useEffect, useRef } from 'react';
@@ -34,7 +34,7 @@ const formValue: Project = {
   electricitySource: '',
   electricity: 0,
   ratio: '',
-  destination: [],
+  destination: [{ id: 1, destinationPercentage: 0, destinationLocation: '', transportMode: '' }],
 };
 
 export default () => {
@@ -47,13 +47,31 @@ export default () => {
       });
     });
   }, []);
-
+  // const ss: Supply[] = [];
   return (
     <ProCard>
       <StepsForm
         formMapRef={formMapRef}
-        onFinish={(values: Project) => {
-          console.log(values);
+        onFinish={(values: any) => {
+          const ss: Supply[] = [];
+          const result: Project = {};
+          for (const v in values) {
+            if (v === 'supply') {
+              values[v].forEach((ele: Supply) => {
+                ele.processing =
+                  values['process' + ele.id] === undefined ? [] : values['process' + ele.id];
+                ele.transportation =
+                  values['transportation' + ele.id] === undefined
+                    ? []
+                    : values['transportation' + ele.id];
+                ss.push(ele);
+              });
+            } else if (v.indexOf('process') === -1 && v.indexOf('transportation') === -1) {
+              result[v] = values[v];
+            }
+          }
+          result.supply = ss;
+          console.log(result);
           return Promise.resolve(true);
         }}
         formProps={{
@@ -66,7 +84,7 @@ export default () => {
           <Product />
         </StepsForm.StepForm>
         <StepsForm.StepForm name="step2" title="Upstream supply">
-          <Parts supply={formValue.supply} parentformRef={formMapRef} />
+          <Parts supply={formValue.supply} />
         </StepsForm.StepForm>
         <StepsForm.StepForm name="step3" title="On site">
           <Engery />
@@ -74,6 +92,9 @@ export default () => {
         <StepsForm.StepForm name="step4" title="Distribution">
           <Distribution destination={formValue.destination} />
         </StepsForm.StepForm>
+        {/* <StepsForm.StepForm name="step5" title="Result">
+          <Results />
+        </StepsForm.StepForm> */}
       </StepsForm>
     </ProCard>
   );

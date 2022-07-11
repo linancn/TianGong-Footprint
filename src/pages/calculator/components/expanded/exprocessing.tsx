@@ -13,12 +13,12 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     processing?.map((item: { id: any }) => item.id),
   );
-  const [dataSource, setDataSource] = useState<Processing[]>(() => processing);
   const Processingcolumns: ProColumns<Processing>[] = [
     {
       title: 'Processing',
       dataIndex: 'id',
       valueType: 'text',
+      readonly: true,
     },
     {
       title: 'Material Category',
@@ -50,22 +50,17 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
       ],
     },
   ];
-  const saveProcessing = (value: Processing[]) => {
-    // console.log(value);
-    // console.log(parentformRef.current[1]?.current?.getFieldsValue());
-    setDataSource(value);
-  };
 
   return (
     <>
       <EditableProTable<Processing>
         rowKey="id"
-        // name="process"
+        name={'process' + supplyid}
         recordCreatorProps={{
           newRecordType: 'dataSource',
           position: 'top',
-          record: () => ({
-            id: Date.now(),
+          record: (_, row) => ({
+            id: row.length + 1,
             materialCategory: '',
             materialType: '',
             supplyid: supplyid,
@@ -77,8 +72,7 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
         }}
         controlled
         columns={Processingcolumns}
-        value={dataSource}
-        onChange={saveProcessing}
+        value={processing}
         editable={{
           type: 'multiple',
           editableKeys,

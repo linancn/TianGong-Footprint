@@ -13,12 +13,13 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     transportation?.map((item: { id: any }) => item.id),
   );
-  const [dataSource, setDataSource] = useState<Transportation[]>(() => transportation);
+
   const Transportationcolumns: ProColumns<Transportation>[] = [
     {
       title: 'Transportation',
       dataIndex: 'id',
       valueType: 'text',
+      readonly: true,
     },
     {
       title: 'Supplier Percentage',
@@ -50,22 +51,17 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
       ],
     },
   ];
-  const saveTransportation = (value: Transportation[]) => {
-    // console.log(value);
-    // console.log(parentformRef.current[1]?.current?.getFieldsValue());
-    setDataSource(value);
-  };
 
   return (
     <>
       <EditableProTable<Transportation>
         rowKey="id"
-        // name="transportation"
+        name={'transportation' + supplyid}
         recordCreatorProps={{
           newRecordType: 'dataSource',
           position: 'top',
-          record: () => ({
-            id: Date.now(),
+          record: (_, row) => ({
+            id: row.length + 1,
             supplierPercentage: '',
             supplierLocation: '',
             supplyid: supplyid,
@@ -77,10 +73,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
         }}
         controlled
         columns={Transportationcolumns}
-        value={dataSource}
-        onChange={(values: Transportation[]) => {
-          saveTransportation(values);
-        }}
+        value={transportation}
         editable={{
           type: 'multiple',
           editableKeys,

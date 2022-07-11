@@ -19,8 +19,8 @@ const Distribution: FC<Props> = ({ destination }) => {
       title: 'NO',
       dataIndex: 'id',
       valueType: 'text',
+      readonly: true,
     },
-
     {
       title: 'destinationPercentage',
       dataIndex: 'destinationPercentage',
