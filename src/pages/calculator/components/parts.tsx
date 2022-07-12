@@ -1,7 +1,6 @@
 import type { Supply } from '@/services/data';
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { EditableProTable } from '@ant-design/pro-components';
+import { ActionType, EditableProTable, ProColumns } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
@@ -70,24 +69,6 @@ const Parts: FC<Props> = ({ supply }) => {
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={() => {
-          actionRef.current?.addEditRecord?.({
-            id: (Math.random() * 1000000).toFixed(0),
-            material: '',
-            materialCategory: '',
-            materialType: '',
-            packaging: '',
-            totalMass: 0,
-            processing: [],
-            tansportation: [],
-          });
-        }}
-        icon={<PlusOutlined />}
-      >
-        Supply
-      </Button>
       <EditableProTable<Supply>
         rowKey="id"
         actionRef={actionRef}
@@ -110,6 +91,29 @@ const Parts: FC<Props> = ({ supply }) => {
           expandedRowRender,
           defaultExpandAllRows: true,
         }}
+        toolBarRender={() => [
+          <>
+            <Button
+              size={'middle'}
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => {
+                actionRef.current?.addEditRecord?.({
+                  id: (Math.random() * 1000000).toFixed(0),
+                  material: '',
+                  materialCategory: '',
+                  materialType: '',
+                  packaging: '',
+                  totalMass: 0,
+                  processing: [],
+                  tansportation: [],
+                });
+              }}
+            >
+              Supply
+            </Button>
+          </>,
+        ]}
       />
     </>
   );

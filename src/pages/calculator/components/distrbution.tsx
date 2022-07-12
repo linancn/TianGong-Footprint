@@ -13,7 +13,9 @@ const Distribution: FC<Props> = ({ destination }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     destination.map((item: { id: any }) => item.id),
   );
-
+  const [count, setCount] = useState<number>(() =>
+    Math.max(destination.map((item: { id: any }) => item.id)),
+  );
   const columns: ProColumns<Destination>[] = [
     {
       title: 'NO',
@@ -54,20 +56,6 @@ const Distribution: FC<Props> = ({ destination }) => {
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={() => {
-          actionRef.current?.addEditRecord?.({
-            id: (Math.random() * 1000000).toFixed(0),
-            destinationPercentage: 0,
-            destinationLocation: '',
-            transportMode: '',
-          });
-        }}
-        icon={<PlusOutlined />}
-      >
-        Add
-      </Button>
       <EditableProTable<Destination>
         rowKey="id"
         actionRef={actionRef}
@@ -87,6 +75,26 @@ const Distribution: FC<Props> = ({ destination }) => {
           actionRender: (row, config, dom) => [dom.delete],
           onChange: setEditableRowKeys,
         }}
+        toolBarRender={() => [
+          <>
+            <Button
+              size={'middle'}
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => {
+                actionRef.current?.addEditRecord?.({
+                  id: count + 1,
+                  destinationPercentage: 0,
+                  destinationLocation: '',
+                  transportMode: '',
+                });
+                setCount(count + 1);
+              }}
+            >
+              Destination
+            </Button>
+          </>,
+        ]}
       />
     </>
   );

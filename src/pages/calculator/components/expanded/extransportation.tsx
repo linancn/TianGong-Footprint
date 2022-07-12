@@ -1,8 +1,9 @@
 import type { Transportation } from '@/services/data';
-import type { ProColumns } from '@ant-design/pro-components';
+import { PlusOutlined } from '@ant-design/icons';
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
-import type { FC } from 'react';
-import { useState } from 'react';
+import { Button } from 'antd';
+import { FC, useRef, useState } from 'react';
 
 type Props = {
   supplyid: number;
@@ -10,10 +11,13 @@ type Props = {
   // parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
 };
 const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
+  const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     transportation?.map((item: { id: any }) => item.id),
   );
-
+  const [count, setCount] = useState<number>(() =>
+    Math.max(transportation?.map((item: { id: any }) => item.id)),
+  );
   const Transportationcolumns: ProColumns<Transportation>[] = [
     {
       title: 'Transportation',
@@ -57,17 +61,19 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
       <EditableProTable<Transportation>
         rowKey="id"
         name={'transportation' + supplyid}
-        recordCreatorProps={{
-          newRecordType: 'dataSource',
-          position: 'top',
-          record: (_, row) => ({
-            id: row.length + 1,
-            supplierPercentage: '',
-            supplierLocation: '',
-            supplyid: supplyid,
-            transportMode: '',
-          }),
-        }}
+        // recordCreatorProps={{
+        //   newRecordType: 'dataSource',
+        //   position: 'top',
+        //   record: (_, row) => ({
+        //     id: row.length + 1,
+        //     supplierPercentage: '',
+        //     supplierLocation: '',
+        //     supplyid: supplyid,
+        //     transportMode: '',
+        //   }),
+        // }}
+        recordCreatorProps={false}
+        actionRef={actionRef}
         scroll={{
           x: true,
         }}
@@ -80,6 +86,27 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
           actionRender: (row, config, dom) => [dom.delete],
           onChange: setEditableRowKeys,
         }}
+        toolBarRender={() => [
+          <>
+            <Button
+              size={'middle'}
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => {
+                actionRef.current?.addEditRecord?.({
+                  id: count + 1,
+                  supplierPercentage: '',
+                  supplierLocation: '',
+                  supplyid: supplyid,
+                  transportMode: '',
+                });
+                setCount(count + 1);
+              }}
+            >
+              Transportation
+            </Button>
+          </>,
+        ]}
       />
     </>
   );
