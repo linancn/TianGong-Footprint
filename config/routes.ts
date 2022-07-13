@@ -11,7 +11,7 @@
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/calculator',
   },
   {
     component: './404',
