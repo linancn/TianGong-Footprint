@@ -34,6 +34,7 @@ const formValue: Project = {
   electricitySource: '',
   electricity: 0,
   ratio: '',
+  co2e: '',
   destination: [{ id: 1, destinationPercentage: 0, destinationLocation: '', transportMode: '' }],
 };
 

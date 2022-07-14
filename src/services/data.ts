@@ -40,5 +40,6 @@ export type Project = {
   electricitySource?: string;
   electricity?: number;
   ratio?: string;
+  co2e?: string;
   destination?: Destination[];
 };

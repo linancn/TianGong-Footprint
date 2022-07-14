@@ -7,7 +7,7 @@ const Product = () => {
         name="projectName"
         label="PRODUCT NAME"
         width="md"
-        placeholder="Enter name"
+        placeholder="Enter"
         // rules={[{ required: true }]}
       />
       <ProFormDigit
@@ -21,7 +21,7 @@ const Product = () => {
         name="projectCategory"
         label="PRODUCT CATEGORY"
         width="md"
-        placeholder="Enter name"
+        placeholder="Enter"
         // rules={[{ required: true }]}
       />
     </>
