@@ -1,13 +1,17 @@
 import type { Supply } from '@/services/data';
+import { getMaterialCategorySelectItems } from '@/services/factorMaterial/api';
 import { PlusOutlined } from '@ant-design/icons';
-import { ActionType, EditableProTable, ProColumns } from '@ant-design/pro-components';
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import Exprocessing from './expanded/exprocessing';
 import Extransportation from './expanded/extransportation';
+import MySelector from './mySelector';
+
 type Props = {
-  supply: any;
+  supply: Supply[];
   // parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
 };
 const Parts: FC<Props> = ({ supply }) => {
@@ -15,6 +19,8 @@ const Parts: FC<Props> = ({ supply }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     supply.map((item: { id: any }) => item.id),
   );
+  // const [materialTypeSelectItems, setMaterialTypeSelectItems] = useState<any>();
+
   const expandedRowRender = (record: any) => {
     return (
       <>
@@ -24,39 +30,70 @@ const Parts: FC<Props> = ({ supply }) => {
     );
   };
 
+  const selectTrueAndFalse = [
+    {
+      label: 'True',
+      value: 'true',
+    },
+    {
+      label: 'False',
+      value: 'false',
+    },
+  ];
+
+  // const onChangeMaterialCategory = (row, data) => {
+  // console.log(dataIndex);
+  // getMaterialTypeSelectItems(newValue).then((result) => setMaterialTypeSelectItems(result));
+  // };
+
+  const materialCategorySelectItems = async () => getMaterialCategorySelectItems();
+
   const columns: ProColumns<Supply>[] = [
     {
       title: 'Material',
       dataIndex: 'material',
       valueType: 'text',
     },
-
     {
       title: 'Material Category',
       dataIndex: 'materialCategory',
-      valueType: 'text',
+      valueType: 'select',
+      request: materialCategorySelectItems,
+      fieldProps: {
+        showSearch: true,
+        // onChange: onChangeMaterialCategory,
+      },
     },
     {
       title: 'Material Type',
       dataIndex: 'materialType',
-      valueType: 'text',
+      renderFormItem: (_row, data) => {
+        return (
+          <MySelector
+            category={data.record?.materialCategory ? data.record?.materialCategory : ''}
+          />
+        );
+      },
     },
     {
       title: 'Packaging',
       dataIndex: 'packaging',
-      valueType: 'text',
+      valueType: 'select',
+      fieldProps: {
+        options: selectTrueAndFalse,
+      },
     },
     {
-      title: 'totalMass',
+      title: 'Total Mass (grams)',
       dataIndex: 'totalMass',
-      valueType: 'text',
+      valueType: 'digit',
     },
     {
       title: 'Options',
       valueType: 'option',
       render: (text, record, _, action) => [
         <a
-          key="editable"
+          key="option_editable"
           onClick={() => {
             action?.startEditable?.(record.id);
           }}
@@ -77,14 +114,14 @@ const Parts: FC<Props> = ({ supply }) => {
         scroll={{
           x: true,
         }}
-        controlled
+        controlled={true}
         columns={columns}
         name="supply"
         value={supply}
         editable={{
           type: 'multiple',
           editableKeys,
-          actionRender: (row, config, dom) => [dom.delete],
+          // actionRender: (row, config, dom) => [dom.delete],
           onChange: setEditableRowKeys,
         }}
         expandable={{
@@ -101,9 +138,9 @@ const Parts: FC<Props> = ({ supply }) => {
                 actionRef.current?.addEditRecord?.({
                   id: (Math.random() * 1000000).toFixed(0),
                   material: '',
-                  materialCategory: '',
-                  materialType: '',
-                  packaging: '',
+                  // materialCategory: '',
+                  // materialType: '',
+                  packaging: 'false',
                   totalMass: 0,
                   processing: [],
                   tansportation: [],

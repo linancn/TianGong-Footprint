@@ -8,22 +8,24 @@ const Product = () => {
         label="PRODUCT NAME"
         width="md"
         placeholder="Enter"
-        // rules={[{ required: true }]}
+        rules={[{ required: true }]}
       />
       <ProFormDigit
         width="md"
+        addonAfter="grams"
         name="totalProductWeignt"
         label="TOTAL PRODUCT WEIGHT"
         placeholder="0"
-        // rules={[{ required: true }]}
+        fieldProps={{}}
+        rules={[{ required: true }]}
       />
-      <ProFormText
+      {/* <ProFormText
         name="projectCategory"
         label="PRODUCT CATEGORY"
         width="md"
         placeholder="Enter"
-        // rules={[{ required: true }]}
-      />
+        rules={[{ required: true }]}
+       />*/}
     </>
   );
 };

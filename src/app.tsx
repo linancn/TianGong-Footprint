@@ -10,7 +10,7 @@ import defaultSettings from '../config/defaultSettings';
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  fetchUserInfo?: () => Promise<undefined>;
 }> {
   return {
     settings: defaultSettings,

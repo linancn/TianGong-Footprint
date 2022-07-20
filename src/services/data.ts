@@ -16,6 +16,7 @@ export type Processing = {
   materialType?: string;
   processCategory?: string;
 };
+
 export type Transportation = {
   supplyid?: number;
   id: number;
@@ -35,7 +36,7 @@ export type Project = {
   projectName?: string;
   totalProductWeignt?: number;
   projectCategory?: string;
-  supply?: Supply[];
+  supply: Supply[];
   location?: string;
   electricitySource?: string;
   electricity?: number;

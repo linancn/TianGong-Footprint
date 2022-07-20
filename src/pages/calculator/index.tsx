@@ -22,9 +22,9 @@ const formValue: Project = {
     {
       id: 1,
       material: '',
-      materialCategory: '',
-      materialType: '',
-      packaging: '',
+      // materialCategory: '',
+      // materialType: '',
+      packaging: 'false',
       totalMass: 0,
       processing: [],
       transportation: [],
@@ -55,7 +55,7 @@ export default () => {
         formMapRef={formMapRef}
         onFinish={(values: any) => {
           const ss: Supply[] = [];
-          const result: Project = {};
+          const result: Project = { supply: [] };
           for (const v in values) {
             if (v === 'supply') {
               values[v].forEach((ele: Supply) => {
@@ -72,7 +72,6 @@ export default () => {
             }
           }
           result.supply = ss;
-          console.log(result);
           return Promise.resolve(true);
         }}
         formProps={{

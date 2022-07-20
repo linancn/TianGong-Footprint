@@ -3,7 +3,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
-import { FC, useRef, useState } from 'react';
+import type { FC } from 'react';
+import { useRef, useState } from 'react';
 
 type Props = {
   supplyid: number;
@@ -35,11 +36,11 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
       dataIndex: 'materialType',
       valueType: 'text',
     },
-    {
-      title: 'Process Category',
-      dataIndex: 'processCategory',
-      valueType: 'text',
-    },
+    // {
+    //   title: 'Process Category',
+    //   dataIndex: 'processCategory',
+    //   valueType: 'text',
+    // },
     {
       title: 'Options',
       valueType: 'option',
@@ -95,10 +96,10 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
                   id: count + 1,
-                  materialCategory: '',
-                  materialType: '',
+                  // materialCategory: '',
+                  // materialType: '',
                   supplyid: supplyid,
-                  processCategory: '',
+                  // processCategory: '',
                 });
                 setCount(count + 1);
               }}
