@@ -1,5 +1,5 @@
 export type Supply = {
-  id: number;
+  id: string;
   material?: string;
   materialCategory?: string;
   materialType?: string;

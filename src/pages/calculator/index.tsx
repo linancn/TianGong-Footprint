@@ -20,10 +20,10 @@ const formValue: Project = {
   projectCategory: '',
   supply: [
     {
-      id: 1,
+      id: '1',
       material: '',
-      // materialCategory: '',
-      // materialType: '',
+      materialCategory: '',
+      materialType: '',
       packaging: 'false',
       totalMass: 0,
       processing: [],

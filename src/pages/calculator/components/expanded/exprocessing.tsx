@@ -5,13 +5,22 @@ import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
+import ProcessCategorySelector from '../selector/processCategory';
+import ProcessTypeSelector from '../selector/processType';
 
 type Props = {
-  supplyid: number;
+  supplyId: string;
+  supplyMaterialCategory: string;
+  supplyMaterialType: string;
   processing: any;
   // parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
 };
-const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
+const Exprocessing: FC<Props> = ({
+  supplyId,
+  supplyMaterialCategory,
+  supplyMaterialType,
+  processing,
+}) => {
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     processing?.map((item: { id: any }) => item.id),
@@ -28,13 +37,28 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
     },
     {
       title: 'Material Category',
-      dataIndex: 'materialCategory',
-      valueType: 'text',
+      dataIndex: 'processCategory',
+      renderFormItem: () => {
+        return (
+          <ProcessCategorySelector
+            materialCategory={supplyMaterialCategory}
+            materialType={supplyMaterialType}
+          />
+        );
+      },
     },
     {
       title: 'Material Type',
-      dataIndex: 'materialType',
-      valueType: 'text',
+      dataIndex: 'processType',
+      renderFormItem: (_row, data) => {
+        return (
+          <ProcessTypeSelector
+            materialCategory={supplyMaterialCategory}
+            materialType={supplyMaterialType}
+            processCategory={data.record?.processCategory ? data.record?.processCategory : ''}
+          />
+        );
+      },
     },
     // {
     //   title: 'Process Category',
@@ -61,7 +85,7 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
     <>
       <EditableProTable<Processing>
         rowKey="id"
-        name={'process' + supplyid}
+        name={'process' + supplyId}
         // recordCreatorProps={{
         //   newRecordType: 'dataSource',
         //   position: 'top',
@@ -98,7 +122,7 @@ const Exprocessing: FC<Props> = ({ supplyid, processing }) => {
                   id: count + 1,
                   // materialCategory: '',
                   // materialType: '',
-                  supplyid: supplyid,
+                  supplyId: supplyId,
                   // processCategory: '',
                 });
                 setCount(count + 1);

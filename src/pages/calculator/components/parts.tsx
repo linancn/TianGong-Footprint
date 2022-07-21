@@ -8,23 +8,26 @@ import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import Exprocessing from './expanded/exprocessing';
 import Extransportation from './expanded/extransportation';
-import MySelector from './mySelector';
+import MaterialTypeSelector from './selector/materialType';
 
 type Props = {
   supply: Supply[];
-  // parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
 };
 const Parts: FC<Props> = ({ supply }) => {
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     supply.map((item: { id: any }) => item.id),
   );
-  // const [materialTypeSelectItems, setMaterialTypeSelectItems] = useState<any>();
 
   const expandedRowRender = (record: any) => {
     return (
       <>
-        <Exprocessing processing={record.processing} supplyid={record.id} />
+        <Exprocessing
+          processing={record.processing}
+          supplyId={record.id}
+          supplyMaterialCategory={record.materialCategory ? record.materialCategory : ''}
+          supplyMaterialType={record.materialType ? record.materialType : ''}
+        />
         <Extransportation transportation={record.transportation} supplyid={record.id} />
       </>
     );
@@ -41,11 +44,6 @@ const Parts: FC<Props> = ({ supply }) => {
     },
   ];
 
-  // const onChangeMaterialCategory = (row, data) => {
-  // console.log(dataIndex);
-  // getMaterialTypeSelectItems(newValue).then((result) => setMaterialTypeSelectItems(result));
-  // };
-
   const materialCategorySelectItems = async () => getMaterialCategorySelectItems();
 
   const columns: ProColumns<Supply>[] = [
@@ -61,7 +59,7 @@ const Parts: FC<Props> = ({ supply }) => {
       request: materialCategorySelectItems,
       fieldProps: {
         showSearch: true,
-        // onChange: onChangeMaterialCategory,
+        allowClear: false,
       },
     },
     {
@@ -69,7 +67,7 @@ const Parts: FC<Props> = ({ supply }) => {
       dataIndex: 'materialType',
       renderFormItem: (_row, data) => {
         return (
-          <MySelector
+          <MaterialTypeSelector
             category={data.record?.materialCategory ? data.record?.materialCategory : ''}
           />
         );
@@ -121,7 +119,7 @@ const Parts: FC<Props> = ({ supply }) => {
         editable={{
           type: 'multiple',
           editableKeys,
-          // actionRender: (row, config, dom) => [dom.delete],
+          actionRender: (_row, _config, dom) => [dom.delete],
           onChange: setEditableRowKeys,
         }}
         expandable={{
@@ -138,8 +136,8 @@ const Parts: FC<Props> = ({ supply }) => {
                 actionRef.current?.addEditRecord?.({
                   id: (Math.random() * 1000000).toFixed(0),
                   material: '',
-                  // materialCategory: '',
-                  // materialType: '',
+                  materialCategory: '',
+                  materialType: '',
                   packaging: 'false',
                   totalMass: 0,
                   processing: [],

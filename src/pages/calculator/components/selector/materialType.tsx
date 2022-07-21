@@ -1,6 +1,5 @@
 import { getMaterialTypeSelectItems } from '@/services/factorMaterial/api';
 import { Select } from 'antd';
-import { Option } from 'antd/lib/mentions';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
@@ -17,15 +16,20 @@ type Props = {
   ) => void;
   category: string;
 };
-const MySelector: FC<Props> = ({ value, onChange, category }) => {
+const { Option } = Select;
+
+const MaterialTypeSelector: FC<Props> = ({ value, onChange, category }) => {
   const [selectData, setSelectData] = useState(<></>);
   const [selectValue, setSelectValue] = useState<any>({});
   const [selectDisabled, setSelectDisabled] = useState(false);
+  const [loadData, setLoadData] = useState(false);
 
   useEffect(() => {
     if (category.length > 0) {
+      setLoadData(true);
+      setSelectValue('');
+      setSelectData(<></>);
       getMaterialTypeSelectItems(category).then((result) => {
-        setSelectValue('');
         for (const r of result) {
           if (r.label === value) {
             setSelectValue(value);
@@ -34,11 +38,13 @@ const MySelector: FC<Props> = ({ value, onChange, category }) => {
         }
         setSelectData(
           result.map((item: any) => (
-            // eslint-disable-next-line react/jsx-key
-            <Option value={item.value}>{item.label}</Option>
+            <Option key={item.label} value={item.value}>
+              {item.label}
+            </Option>
           )),
         );
         setSelectDisabled(false);
+        setLoadData(false);
       });
     } else {
       setSelectDisabled(true);
@@ -50,9 +56,9 @@ const MySelector: FC<Props> = ({ value, onChange, category }) => {
   return (
     <Select
       showSearch
-      allowClear={true}
       value={selectValue}
       disabled={selectDisabled}
+      loading={loadData}
       onSelect={(sValue: any) => {
         setSelectValue(sValue);
       }}
@@ -67,4 +73,4 @@ const MySelector: FC<Props> = ({ value, onChange, category }) => {
   );
 };
 
-export default MySelector;
+export default MaterialTypeSelector;
