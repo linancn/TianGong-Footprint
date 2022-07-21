@@ -16,9 +16,6 @@ const Distribution: FC<Props> = ({ destination }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     destination.map((item: { id: any }) => item.id),
   );
-  const [count, setCount] = useState<number>(() =>
-    Math.max(destination.map((item: { id: any }) => item.id)),
-  );
 
   const transportModeSelectItems = async () => getTransportModeSelectItems();
 
@@ -101,7 +98,6 @@ const Distribution: FC<Props> = ({ destination }) => {
                   destinationLocation: '',
                   transportMode: '',
                 });
-                setCount(count + 1);
               }}
             >
               Destination
