@@ -1,15 +1,17 @@
-import { ProCard, ProFormDigit, ProFormText } from '@ant-design/pro-components';
+import { getElectricitySourceSelectItems } from '@/services/factorElectricity/api';
+import { ProCard, ProFormDigit, ProFormSelect, ProFormText } from '@ant-design/pro-components';
 
 const Engery = () => {
+  const electricitySourceSelectItems = async () => getElectricitySourceSelectItems();
   return (
     <>
       <ProCard hoverable bordered>
         <ProFormText name="location" label="Location" width="md" placeholder="Enter" />
-        <ProFormText
+        <ProFormSelect
           name="electricitySource"
           label="Electricity Source"
           width="md"
-          placeholder="Enter"
+          request={electricitySourceSelectItems}
         />
         <ProFormDigit width="md" name="electricity" label="Electricity" placeholder="0" />
         <ProFormText name="ratio" label="Ratio" width="md" placeholder="Enter" />

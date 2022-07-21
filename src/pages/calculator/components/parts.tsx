@@ -6,6 +6,7 @@ import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Exprocessing from './expanded/exprocessing';
 import Extransportation from './expanded/extransportation';
 import MaterialTypeSelector from './selector/materialType';
@@ -47,6 +48,11 @@ const Parts: FC<Props> = ({ supply }) => {
   const materialCategorySelectItems = async () => getMaterialCategorySelectItems();
 
   const columns: ProColumns<Supply>[] = [
+    {
+      title: 'NO',
+      dataIndex: 'index',
+      valueType: 'index',
+    },
     {
       title: 'Material',
       dataIndex: 'material',
@@ -134,7 +140,7 @@ const Parts: FC<Props> = ({ supply }) => {
               icon={<PlusOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
-                  id: (Math.random() * 1000000).toFixed(0),
+                  id: uuidv4(),
                   material: '',
                   materialCategory: '',
                   materialType: '',

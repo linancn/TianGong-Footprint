@@ -1,10 +1,12 @@
 import type { Transportation } from '@/services/data';
+import { getTransportModeSelectItems } from '@/services/factorTransportation/api';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
   supplyid: number;
@@ -16,20 +18,22 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     transportation?.map((item: { id: any }) => item.id),
   );
-  const [count, setCount] = useState<number>(() =>
-    Math.max(transportation?.map((item: { id: any }) => item.id)),
-  );
+
+  const transportModeSelectItems = async () => getTransportModeSelectItems();
+
   const Transportationcolumns: ProColumns<Transportation>[] = [
     {
       title: 'Transportation',
-      dataIndex: 'id',
-      valueType: 'text',
-      readonly: true,
+      dataIndex: 'index',
+      valueType: 'index',
     },
     {
-      title: 'Supplier Percentage',
+      title: 'Supplier Percentage (%)',
       dataIndex: 'supplierPercentage',
-      valueType: 'text',
+      valueType: 'digit',
+      fieldProps: {
+        defaultValue: 0,
+      },
     },
     {
       title: 'Supplier Location',
@@ -39,7 +43,12 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
     {
       title: 'Transport Mode',
       dataIndex: 'transportMode',
-      valueType: 'text',
+      valueType: 'select',
+      request: transportModeSelectItems,
+      fieldProps: {
+        showSearch: true,
+        allowClear: false,
+      },
     },
     {
       title: 'Options',
@@ -95,13 +104,12 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
               icon={<PlusOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
-                  id: count + 1,
+                  id: uuidv4(),
                   supplierPercentage: '',
                   supplierLocation: '',
                   supplyid: supplyid,
                   transportMode: '',
                 });
-                setCount(count + 1);
               }}
             >
               Transportation

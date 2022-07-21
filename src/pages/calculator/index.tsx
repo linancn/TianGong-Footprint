@@ -2,10 +2,12 @@ import type { Project, Supply } from '@/services/data';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProCard, StepsForm } from '@ant-design/pro-components';
 import React, { useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Distribution from './components/distrbution';
 import Engery from './components/engery';
 import Parts from './components/parts';
 import Product from './components/product';
+
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -20,7 +22,7 @@ const formValue: Project = {
   projectCategory: '',
   supply: [
     {
-      id: '1',
+      id: uuidv4(),
       material: '',
       materialCategory: '',
       materialType: '',
@@ -35,7 +37,9 @@ const formValue: Project = {
   electricity: 0,
   ratio: '',
   co2e: '',
-  destination: [{ id: 1, destinationPercentage: 0, destinationLocation: '', transportMode: '' }],
+  destination: [
+    { id: uuidv4(), destinationPercentage: 0, destinationLocation: '', transportMode: '' },
+  ],
 };
 
 export default () => {

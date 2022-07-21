@@ -11,7 +11,7 @@ export type Supply = {
 
 export type Processing = {
   supplyid?: number;
-  id: number;
+  id: string;
   materialCategory?: string;
   materialType?: string;
   processCategory?: string;
@@ -19,14 +19,14 @@ export type Processing = {
 
 export type Transportation = {
   supplyid?: number;
-  id: number;
+  id: string;
   supplierPercentage?: string;
   supplierLocation?: string;
   transportMode?: string;
 };
 
 export type Destination = {
-  id: number;
+  id: string;
   destinationPercentage?: number;
   destinationLocation?: string;
   transportMode?: string;

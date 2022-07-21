@@ -5,6 +5,7 @@ import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import ProcessCategorySelector from '../selector/processCategory';
 import ProcessTypeSelector from '../selector/processType';
 
@@ -25,15 +26,12 @@ const Exprocessing: FC<Props> = ({
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     processing?.map((item: { id: any }) => item.id),
   );
-  const [count, setCount] = useState<number>(() =>
-    Math.max(processing?.map((item: { id: any }) => item.id)),
-  );
+
   const Processingcolumns: ProColumns<Processing>[] = [
     {
       title: 'Processing',
-      dataIndex: 'id',
-      valueType: 'text',
-      readonly: true,
+      dataIndex: 'index',
+      valueType: 'index',
     },
     {
       title: 'Material Category',
@@ -119,13 +117,12 @@ const Exprocessing: FC<Props> = ({
               icon={<PlusOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
-                  id: count + 1,
+                  id: uuidv4(),
                   // materialCategory: '',
                   // materialType: '',
                   supplyId: supplyId,
                   // processCategory: '',
                 });
-                setCount(count + 1);
               }}
             >
               Processing

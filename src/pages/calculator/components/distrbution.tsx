@@ -1,10 +1,13 @@
 import type { Destination } from '@/services/data';
+import { getTransportModeSelectItems } from '@/services/factorTransportation/api';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 type Props = {
   destination: any;
 };
@@ -16,27 +19,37 @@ const Distribution: FC<Props> = ({ destination }) => {
   const [count, setCount] = useState<number>(() =>
     Math.max(destination.map((item: { id: any }) => item.id)),
   );
+
+  const transportModeSelectItems = async () => getTransportModeSelectItems();
+
   const columns: ProColumns<Destination>[] = [
     {
       title: 'NO',
-      dataIndex: 'id',
-      valueType: 'text',
-      readonly: true,
+      dataIndex: 'index',
+      valueType: 'index',
     },
     {
-      title: 'destinationPercentage',
+      title: 'Destination Percentage (%)',
       dataIndex: 'destinationPercentage',
-      valueType: 'text',
+      valueType: 'digit',
+      fieldProps: {
+        defaultValue: 0,
+      },
     },
     {
-      title: 'destinationLocation',
+      title: 'Destination Location',
       dataIndex: 'destinationLocation',
       valueType: 'text',
     },
     {
-      title: 'transportMode',
+      title: 'Transport Mode',
       dataIndex: 'transportMode',
-      valueType: 'text',
+      valueType: 'select',
+      request: transportModeSelectItems,
+      fieldProps: {
+        showSearch: true,
+        allowClear: false,
+      },
     },
     {
       title: 'Options',
@@ -83,7 +96,7 @@ const Distribution: FC<Props> = ({ destination }) => {
               icon={<PlusOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
-                  id: count + 1,
+                  id: uuidv4(),
                   destinationPercentage: 0,
                   destinationLocation: '',
                   transportMode: '',
