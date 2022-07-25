@@ -3,7 +3,7 @@ export type Supply = {
   material?: string;
   materialCategory?: string;
   materialType?: string;
-  packaging?: string;
+  packaging?: boolean;
   totalMass?: number;
   processing?: Processing[];
   transportation?: Transportation[];
@@ -43,6 +43,6 @@ export type Project = {
   electricitySource?: string;
   electricity?: number;
   ratio?: number;
-  co2e?: number;
+  manufactureCo2e?: number;
   destination?: Destination[];
 };

@@ -40,11 +40,11 @@ const Parts: FC<Props> = ({ supply }) => {
   const selectTrueAndFalse = [
     {
       label: 'True',
-      value: 'true',
+      value: true,
     },
     {
       label: 'False',
-      value: 'false',
+      value: false,
     },
   ];
 

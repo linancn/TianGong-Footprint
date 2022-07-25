@@ -8,15 +8,7 @@ import Distribution from './components/distrbution';
 import Engery from './components/engery';
 import Parts from './components/parts';
 import Product from './components/product';
-import Results from './components/results';
-
-// const waitTime = (time: number = 100) => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(true);
-//     }, time);
-//   });
-// };
+import Result from './components/result';
 
 const baseData: Project = {
   projectName: '',
@@ -28,7 +20,7 @@ const baseData: Project = {
       material: '',
       materialCategory: '',
       materialType: '',
-      packaging: 'false',
+      packaging: false,
       totalMass: 0,
       processing: [],
       transportation: [],
@@ -38,7 +30,7 @@ const baseData: Project = {
   electricitySource: '',
   electricity: 0,
   ratio: 0,
-  co2e: 0,
+  manufactureCo2e: 0,
   destination: [
     { id: uuidv4(), destinationPercentage: 0, destinationLocation: '', transportMode: '' },
   ],
@@ -52,7 +44,7 @@ const testData: Project = {
       material: 'Part1',
       materialCategory: 'Metal',
       materialType: 'Aluminium',
-      packaging: 'false',
+      packaging: false,
       totalMass: 150,
       processing: [
         {
@@ -83,7 +75,7 @@ const testData: Project = {
       material: 'Part2',
       materialCategory: 'Metal',
       materialType: 'Steel',
-      packaging: 'false',
+      packaging: false,
       totalMass: 500,
       processing: [],
       transportation: [
@@ -108,7 +100,7 @@ const testData: Project = {
       material: 'Cover',
       materialCategory: 'Plastics',
       materialType: 'Polyester',
-      packaging: 'true',
+      packaging: true,
       totalMass: 50,
       processing: [],
       transportation: [
@@ -123,10 +115,10 @@ const testData: Project = {
     },
   ],
   location: 'Shenzhen',
-  electricitySource: 'non-renew',
+  electricitySource: 'Non-renewable',
   electricity: 100,
   ratio: 70,
-  co2e: 0,
+  manufactureCo2e: 0,
   destination: [
     {
       id: uuidv4(),
@@ -219,7 +211,7 @@ const Calculator = () => {
         </StepsForm>
       </ProCard>
       <ProCard bodyStyle={cardHidden ? {} : { display: 'none' }}>
-        <Results projectData={projectData} />
+        <Result projectData={projectData} />
       </ProCard>
     </>
   );

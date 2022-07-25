@@ -18,7 +18,12 @@ const Engery = () => {
       </ProCard>
 
       <ProCard hoverable bordered>
-        <ProFormText name="co2e" label="CO2-e in manufacture" width="md" placeholder="Enter" />
+        <ProFormText
+          name="manufactureCo2e"
+          label="CO2-e in manufacture"
+          width="md"
+          placeholder="Enter"
+        />
       </ProCard>
     </>
   );
