@@ -5,7 +5,7 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Exprocessing from './expanded/exprocessing';
 import Extransportation from './expanded/extransportation';
@@ -17,22 +17,25 @@ type Props = {
 const Parts: FC<Props> = ({ supply }) => {
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
-    supply.map((item: { id: any }) => item.id),
+    supply.map((item) => item.id),
   );
 
-  const expandedRowRender = (record: any) => {
-    return (
-      <>
-        <Exprocessing
-          processing={record.processing}
-          supplyId={record.id}
-          supplyMaterialCategory={record.materialCategory ? record.materialCategory : ''}
-          supplyMaterialType={record.materialType ? record.materialType : ''}
-        />
-        <Extransportation transportation={record.transportation} supplyid={record.id} />
-      </>
-    );
-  };
+  useEffect(() => {
+    setEditableRowKeys(supply.map((item) => item.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supply]);
+
+  const expandedRowRender = (record: any) => (
+    <>
+      <Exprocessing
+        processing={record.processing}
+        supplyId={record.id}
+        supplyMaterialCategory={record.materialCategory ? record.materialCategory : ''}
+        supplyMaterialType={record.materialType ? record.materialType : ''}
+      />
+      <Extransportation transportation={record.transportation} supplyid={record.id} />
+    </>
+  );
 
   const selectTrueAndFalse = [
     {

@@ -1,3 +1,4 @@
+import { waitTime } from '@/helper/waitTime';
 import type { Transportation } from '@/services/data';
 import { getTransportModeSelectItems } from '@/services/factorTransportation/api';
 import { PlusOutlined } from '@ant-design/icons';
@@ -5,11 +6,11 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
-  supplyid: number;
+  supplyid: string;
   transportation: any;
   // parentformRef: React.MutableRefObject<React.MutableRefObject<ProFormInstance<any> | undefined>[]>;
 };
@@ -18,6 +19,17 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     transportation?.map((item: { id: any }) => item.id),
   );
+
+  useEffect(() => {
+    setEditableRowKeys(
+      transportation?.map(async (item: any) => {
+        await waitTime(150);
+        actionRef.current?.addEditRecord?.(item);
+        return item.id;
+      }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const transportModeSelectItems = async () => getTransportModeSelectItems();
 
@@ -48,6 +60,14 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
       fieldProps: {
         showSearch: true,
         allowClear: false,
+      },
+    },
+    {
+      title: 'Distance (km)',
+      dataIndex: 'distance',
+      valueType: 'digit',
+      fieldProps: {
+        defaultValue: 0,
       },
     },
     {
@@ -105,9 +125,9 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
                   id: uuidv4(),
-                  supplierPercentage: '',
+                  supplierPercentage: 0,
                   supplierLocation: '',
-                  supplyid: supplyid,
+                  // supplyid: supplyid,
                   transportMode: '',
                 });
               }}

@@ -10,19 +10,20 @@ export type Supply = {
 };
 
 export type Processing = {
-  supplyid?: number;
+  // supplyid?: number;
   id: string;
-  materialCategory?: string;
-  materialType?: string;
+  // materialCategory?: string;
+  processType?: string;
   processCategory?: string;
 };
 
 export type Transportation = {
-  supplyid?: number;
+  // supplyid?: number;
   id: string;
-  supplierPercentage?: string;
+  supplierPercentage?: number;
   supplierLocation?: string;
   transportMode?: string;
+  distance?: number;
 };
 
 export type Destination = {
@@ -30,17 +31,18 @@ export type Destination = {
   destinationPercentage?: number;
   destinationLocation?: string;
   transportMode?: string;
+  distance?: number;
 };
 
 export type Project = {
   projectName?: string;
-  totalProductWeignt?: number;
-  projectCategory?: string;
+  // totalProductWeignt?: number;
+  // projectCategory?: string;
   supply: Supply[];
   location?: string;
   electricitySource?: string;
   electricity?: number;
-  ratio?: string;
-  co2e?: string;
+  ratio?: number;
+  co2e?: number;
   destination?: Destination[];
 };

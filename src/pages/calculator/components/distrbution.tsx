@@ -5,7 +5,7 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
@@ -16,6 +16,11 @@ const Distribution: FC<Props> = ({ destination }) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     destination.map((item: { id: any }) => item.id),
   );
+
+  useEffect(() => {
+    setEditableRowKeys(destination.map((item: { id: any }) => item.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [destination]);
 
   const transportModeSelectItems = async () => getTransportModeSelectItems();
 
@@ -46,6 +51,14 @@ const Distribution: FC<Props> = ({ destination }) => {
       fieldProps: {
         showSearch: true,
         allowClear: false,
+      },
+    },
+    {
+      title: 'Distance (km)',
+      dataIndex: 'distance',
+      valueType: 'digit',
+      fieldProps: {
+        defaultValue: 0,
       },
     },
     {

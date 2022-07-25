@@ -1,4 +1,4 @@
-import { ProFormDigit, ProFormText } from '@ant-design/pro-components';
+import { ProFormText } from '@ant-design/pro-components';
 
 const Product = () => {
   return (
@@ -10,7 +10,7 @@ const Product = () => {
         placeholder="Enter"
         rules={[{ required: true }]}
       />
-      <ProFormDigit
+      {/* <ProFormDigit
         width="md"
         addonAfter="grams"
         name="totalProductWeignt"
@@ -18,7 +18,7 @@ const Product = () => {
         placeholder="0"
         fieldProps={{}}
         rules={[{ required: true }]}
-      />
+      /> */}
       {/* <ProFormText
         name="projectCategory"
         label="PRODUCT CATEGORY"

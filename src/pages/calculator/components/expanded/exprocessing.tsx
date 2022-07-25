@@ -1,10 +1,11 @@
+import { waitTime } from '@/helper/waitTime';
 import type { Processing } from '@/services/data';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ProcessCategorySelector from '../selector/processCategory';
 import ProcessTypeSelector from '../selector/processType';
@@ -23,9 +24,21 @@ const Exprocessing: FC<Props> = ({
   processing,
 }) => {
   const actionRef = useRef<ActionType>();
+
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
     processing?.map((item: { id: any }) => item.id),
   );
+
+  useEffect(() => {
+    setEditableRowKeys(
+      processing?.map(async (item: any) => {
+        await waitTime(150);
+        actionRef.current?.addEditRecord?.(item);
+        return item.id;
+      }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const Processingcolumns: ProColumns<Processing>[] = [
     {
@@ -34,7 +47,7 @@ const Exprocessing: FC<Props> = ({
       valueType: 'index',
     },
     {
-      title: 'Material Category',
+      title: 'Process Category',
       dataIndex: 'processCategory',
       renderFormItem: () => {
         return (
@@ -46,7 +59,7 @@ const Exprocessing: FC<Props> = ({
       },
     },
     {
-      title: 'Material Type',
+      title: 'Process',
       dataIndex: 'processType',
       renderFormItem: (_row, data) => {
         return (
@@ -58,11 +71,6 @@ const Exprocessing: FC<Props> = ({
         );
       },
     },
-    // {
-    //   title: 'Process Category',
-    //   dataIndex: 'processCategory',
-    //   valueType: 'text',
-    // },
     {
       title: 'Options',
       valueType: 'option',
@@ -120,7 +128,7 @@ const Exprocessing: FC<Props> = ({
                   id: uuidv4(),
                   // materialCategory: '',
                   // materialType: '',
-                  supplyId: supplyId,
+                  // supplyId: supplyId,
                   // processCategory: '',
                 });
               }}
