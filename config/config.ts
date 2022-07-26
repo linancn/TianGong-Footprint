@@ -29,7 +29,11 @@ export default defineConfig({
   },
 
   targets: {
-    ie: 11,
+    chrome: 49,
+    firefox: 64,
+    safari: 10,
+    edge: 13,
+    ios: 10,
   },
   // umi routes: https://umijs.org/docs/routing
   routes,
