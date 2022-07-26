@@ -76,7 +76,7 @@ const testData: Project = {
       materialCategory: 'Metal',
       materialType: 'Steel',
       packaging: false,
-      totalMass: 500,
+      totalMass: 100,
       processing: [],
       transportation: [
         {
@@ -116,9 +116,9 @@ const testData: Project = {
   ],
   location: 'Shenzhen',
   electricitySource: 'Non-renewable',
-  electricity: 100,
+  electricity: 2000,
   ratio: 70,
-  manufactureCo2e: 0,
+  manufactureCo2e: 1000,
   destination: [
     {
       id: uuidv4(),
