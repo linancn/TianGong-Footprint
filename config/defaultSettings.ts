@@ -4,20 +4,19 @@ const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
 } = {
-  navTheme: 'realDark',
+  title: 'TianGong Footprint',
   primaryColor: '#5c246a',
   layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: false,
-  colorWeak: false,
   menuRender: false,
   menuHeaderRender: false,
   splitMenus: false,
-  title: 'TianGong Footprint',
   pwa: false,
   logo: '/logo.svg',
-  iconfontUrl: '',
+  // navTheme: 'realDark', //beta功能
+  headerHeight: 56,
 };
 
 export default Settings;

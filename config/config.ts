@@ -7,8 +7,8 @@ import routes from './routes';
 export default defineConfig({
   hash: true,
   antd: {
-    dark: true, // 开启暗色主题
-    compact: true, // 开启紧凑主题
+    // dark: true, // 开启暗色主题 umi3选项
+    // compact: true, // 开启紧凑主题 umi3选项
   },
   request: {},
   initialState: {},
@@ -44,7 +44,7 @@ export default defineConfig({
     // 只有设置为 variable， 才能使用 configProvide 动态设置主色调
     // https://ant.design/docs/react/customize-theme-variable-cn
     'root-entry-name': 'variable',
-    'primary-color': defaultSettings.primaryColor,
+    // 'primary-color': defaultSettings.primaryColor,
   },
   ignoreMomentLocale: true,
   // proxy: proxy[REACT_APP_ENV || 'dev'],
