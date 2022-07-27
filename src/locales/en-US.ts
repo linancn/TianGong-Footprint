@@ -1,3 +1,4 @@
+import calculator from './en-US/calculator';
 import component from './en-US/component';
 import globalHeader from './en-US/globalHeader';
 import menu from './en-US/menu';
@@ -22,4 +23,5 @@ export default {
   ...pwa,
   ...component,
   ...pages,
+  ...calculator,
 };

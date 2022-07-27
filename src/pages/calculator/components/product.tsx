@@ -1,13 +1,20 @@
 import { ProFormText } from '@ant-design/pro-components';
-
+import { useIntl } from 'umi';
 const Product = () => {
+  const intl = useIntl();
   return (
     <>
       <ProFormText
         name="projectName"
-        label="PRODUCT NAME"
+        label={intl.formatMessage({
+          id: 'calculator.productName',
+          defaultMessage: 'Product Name',
+        })}
         style={{ width: '100%', minWidth: '100px' }}
-        placeholder="Enter"
+        placeholder={intl.formatMessage({
+          id: 'calculator.enter',
+          defaultMessage: 'Enter',
+        })}
         rules={[{ required: true }]}
       />
       {/* <ProFormDigit

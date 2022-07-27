@@ -3,6 +3,7 @@ import type { Project } from '@/services/data';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProCard, StepsForm } from '@ant-design/pro-components';
 import { useEffect, useRef, useState } from 'react';
+import { useIntl } from 'umi';
 import { v4 as uuidv4 } from 'uuid';
 import Distribution from './components/distrbution';
 import Engery from './components/engery';
@@ -151,6 +152,7 @@ const Calculator = () => {
   const [cardHidden, setCardHidden] = useState(false);
   const [formData, setFormData] = useState<Project>(baseData);
   const [projectData, setProjectData] = useState<Project>(baseData);
+  const intl = useIntl();
 
   useEffect(() => {
     if (window.location.search.indexOf('test=1') != -1) setFormData(testData);
@@ -176,7 +178,10 @@ const Calculator = () => {
           }}
           formProps={{
             validateMessages: {
-              required: '此项为必填项',
+              required: intl.formatMessage({
+                id: 'calculator.mandatoryField',
+                defaultMessage: '此项为必填项',
+              }),
             },
           }}
           submitter={{
@@ -185,16 +190,40 @@ const Calculator = () => {
             },
           }}
         >
-          <StepsForm.StepForm name="step1" title="Product">
+          <StepsForm.StepForm
+            name="step1"
+            title={intl.formatMessage({
+              id: 'calculator.product',
+              defaultMessage: 'Product',
+            })}
+          >
             <Product />
           </StepsForm.StepForm>
-          <StepsForm.StepForm name="step2" title="Upstream supply">
+          <StepsForm.StepForm
+            name="step2"
+            title={intl.formatMessage({
+              id: 'calculator.upstreamupply',
+              defaultMessage: 'Upstream supply',
+            })}
+          >
             <Parts supply={formData.supply} />
           </StepsForm.StepForm>
-          <StepsForm.StepForm name="step3" title="On site">
+          <StepsForm.StepForm
+            name="step3"
+            title={intl.formatMessage({
+              id: 'calculator.onSite',
+              defaultMessage: 'On site',
+            })}
+          >
             <Engery />
           </StepsForm.StepForm>
-          <StepsForm.StepForm name="step4" title="Distribution">
+          <StepsForm.StepForm
+            name="step4"
+            title={intl.formatMessage({
+              id: 'calculator.distribution',
+              defaultMessage: 'Distribution',
+            })}
+          >
             <Distribution destination={formData.destination} />
           </StepsForm.StepForm>
         </StepsForm>

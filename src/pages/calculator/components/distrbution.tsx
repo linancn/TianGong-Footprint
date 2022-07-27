@@ -6,6 +6,7 @@ import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { FormattedMessage } from 'umi';
 import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
@@ -26,12 +27,17 @@ const Distribution: FC<Props> = ({ destination }) => {
 
   const columns: ProColumns<Destination>[] = [
     {
-      title: 'NO',
+      title: <FormattedMessage id="calculator.index" defaultMessage="NO" />,
       dataIndex: 'index',
       valueType: 'index',
     },
     {
-      title: 'Destination Percentage (%)',
+      title: (
+        <FormattedMessage
+          id="calculator.destinationPercentage"
+          defaultMessage="Destination Percentage (%)"
+        />
+      ),
       dataIndex: 'destinationPercentage',
       valueType: 'digit',
       fieldProps: {
@@ -39,12 +45,17 @@ const Distribution: FC<Props> = ({ destination }) => {
       },
     },
     {
-      title: 'Destination Location',
+      title: (
+        <FormattedMessage
+          id="calculator.destinationLocation"
+          defaultMessage="Destination Location"
+        />
+      ),
       dataIndex: 'destinationLocation',
       valueType: 'text',
     },
     {
-      title: 'Transport Mode',
+      title: <FormattedMessage id="calculator.transportMode" defaultMessage="Transport Mode" />,
       dataIndex: 'transportMode',
       valueType: 'select',
       request: transportModeSelectItems,
@@ -54,7 +65,7 @@ const Distribution: FC<Props> = ({ destination }) => {
       },
     },
     {
-      title: 'Distance (km)',
+      title: <FormattedMessage id="calculator.distance" defaultMessage="Distance (km)" />,
       dataIndex: 'distance',
       valueType: 'digit',
       fieldProps: {
@@ -62,7 +73,7 @@ const Distribution: FC<Props> = ({ destination }) => {
       },
     },
     {
-      title: 'Options',
+      title: <FormattedMessage id="calculator.option" defaultMessage="Option" />,
       valueType: 'option',
       render: (text, record, _, action) => [
         <a
@@ -71,7 +82,7 @@ const Distribution: FC<Props> = ({ destination }) => {
             action?.startEditable?.(record.id);
           }}
         >
-          edit
+          <FormattedMessage id="calculator.edit" defaultMessage="Edit" />
         </a>,
       ],
     },
@@ -113,7 +124,7 @@ const Distribution: FC<Props> = ({ destination }) => {
                 });
               }}
             >
-              Destination
+              <FormattedMessage id="calculator.destination" defaultMessage="Destination" />
             </Button>
           </>,
         ]}
