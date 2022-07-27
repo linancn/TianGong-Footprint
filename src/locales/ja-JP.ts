@@ -1,3 +1,4 @@
+import calculator from './ja-JP/calculator';
 import component from './ja-JP/component';
 import globalHeader from './ja-JP/globalHeader';
 import menu from './ja-JP/menu';
@@ -21,4 +22,5 @@ export default {
   ...pwa,
   ...component,
   ...pages,
+  ...calculator,
 };

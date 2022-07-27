@@ -1,3 +1,4 @@
+import calculator from './zh-CN/calculator';
 import component from './zh-CN/component';
 import globalHeader from './zh-CN/globalHeader';
 import menu from './zh-CN/menu';
@@ -22,4 +23,5 @@ export default {
   ...settings,
   ...pwa,
   ...component,
+  ...calculator,
 };

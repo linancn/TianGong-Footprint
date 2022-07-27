@@ -7,6 +7,7 @@ import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { FormattedMessage } from 'umi';
 import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
@@ -35,12 +36,17 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
 
   const Transportationcolumns: ProColumns<Transportation>[] = [
     {
-      title: 'Transportation',
+      title: <FormattedMessage id="calculator.transportation" defaultMessage="Transportation" />,
       dataIndex: 'index',
       valueType: 'index',
     },
     {
-      title: 'Supplier Percentage (%)',
+      title: (
+        <FormattedMessage
+          id="calculator.supplierPercentage"
+          defaultMessage="Supplier Percentage (%)"
+        />
+      ),
       dataIndex: 'supplierPercentage',
       valueType: 'digit',
       fieldProps: {
@@ -48,12 +54,14 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
       },
     },
     {
-      title: 'Supplier Location',
+      title: (
+        <FormattedMessage id="calculator.supplierLocation" defaultMessage="Supplier Location" />
+      ),
       dataIndex: 'supplierLocation',
       valueType: 'text',
     },
     {
-      title: 'Transport Mode',
+      title: <FormattedMessage id="calculator.transportMode" defaultMessage="Transport Mode" />,
       dataIndex: 'transportMode',
       valueType: 'select',
       request: transportModeSelectItems,
@@ -63,7 +71,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
       },
     },
     {
-      title: 'Distance (km)',
+      title: <FormattedMessage id="calculator.distance" defaultMessage="Distance (km)" />,
       dataIndex: 'distance',
       valueType: 'digit',
       fieldProps: {
@@ -71,7 +79,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
       },
     },
     {
-      title: 'Options',
+      title: <FormattedMessage id="calculator.option" defaultMessage="Option" />,
       valueType: 'option',
       render: (text, row, _, action) => [
         <a
@@ -80,7 +88,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
             action?.startEditable?.(row.id);
           }}
         >
-          edit
+          <FormattedMessage id="calculator.edit" defaultMessage="Edit" />
         </a>,
       ],
     },
@@ -132,7 +140,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
                 });
               }}
             >
-              Transportation
+              <FormattedMessage id="calculator.transportation" defaultMessage="Transportation" />
             </Button>
           </>,
         ]}

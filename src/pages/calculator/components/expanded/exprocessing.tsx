@@ -6,6 +6,7 @@ import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { FormattedMessage } from 'umi';
 import { v4 as uuidv4 } from 'uuid';
 import ProcessCategorySelector from '../selector/processCategory';
 import ProcessTypeSelector from '../selector/processType';
@@ -42,12 +43,12 @@ const Exprocessing: FC<Props> = ({
 
   const Processingcolumns: ProColumns<Processing>[] = [
     {
-      title: 'Processing',
+      title: <FormattedMessage id="calculator.processing" defaultMessage="Processing" />,
       dataIndex: 'index',
       valueType: 'index',
     },
     {
-      title: 'Process Category',
+      title: <FormattedMessage id="calculator.processCategory" defaultMessage="Process Category" />,
       dataIndex: 'processCategory',
       renderFormItem: () => {
         return (
@@ -59,7 +60,7 @@ const Exprocessing: FC<Props> = ({
       },
     },
     {
-      title: 'Process',
+      title: <FormattedMessage id="calculator.processType" defaultMessage="Process" />,
       dataIndex: 'processType',
       renderFormItem: (_row, data) => {
         return (
@@ -72,7 +73,7 @@ const Exprocessing: FC<Props> = ({
       },
     },
     {
-      title: 'Options',
+      title: <FormattedMessage id="calculator.option" defaultMessage="Option" />,
       valueType: 'option',
       render: (text, row, _, action) => [
         <a
@@ -81,7 +82,7 @@ const Exprocessing: FC<Props> = ({
             action?.startEditable?.(row.id);
           }}
         >
-          edit
+          <FormattedMessage id="calculator.edit" defaultMessage="Edit" />,
         </a>,
       ],
     },
@@ -133,7 +134,7 @@ const Exprocessing: FC<Props> = ({
                 });
               }}
             >
-              Processing
+              <FormattedMessage id="calculator.processing" defaultMessage="Processing" />,
             </Button>
           </>,
         ]}

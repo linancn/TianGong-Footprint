@@ -6,6 +6,7 @@ import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { FormattedMessage } from 'umi';
 import { v4 as uuidv4 } from 'uuid';
 import Exprocessing from './expanded/exprocessing';
 import Extransportation from './expanded/extransportation';
@@ -52,17 +53,19 @@ const Parts: FC<Props> = ({ supply }) => {
 
   const columns: ProColumns<Supply>[] = [
     {
-      title: 'NO',
+      title: <FormattedMessage id="calculator.index" defaultMessage="NO" />,
       dataIndex: 'index',
       valueType: 'index',
     },
     {
-      title: 'Material',
+      title: <FormattedMessage id="calculator.material" defaultMessage="Material" />,
       dataIndex: 'material',
       valueType: 'text',
     },
     {
-      title: 'Material Category',
+      title: (
+        <FormattedMessage id="calculator.materialCategory" defaultMessage="Material Category" />
+      ),
       dataIndex: 'materialCategory',
       valueType: 'select',
       request: materialCategorySelectItems,
@@ -72,7 +75,7 @@ const Parts: FC<Props> = ({ supply }) => {
       },
     },
     {
-      title: 'Material Type',
+      title: <FormattedMessage id="calculator.materialType" defaultMessage="Material Type" />,
       dataIndex: 'materialType',
       renderFormItem: (_row, data) => {
         return (
@@ -83,7 +86,7 @@ const Parts: FC<Props> = ({ supply }) => {
       },
     },
     {
-      title: 'Packaging',
+      title: <FormattedMessage id="calculator.packaging" defaultMessage="packaging" />,
       dataIndex: 'packaging',
       valueType: 'select',
       fieldProps: {
@@ -91,12 +94,12 @@ const Parts: FC<Props> = ({ supply }) => {
       },
     },
     {
-      title: 'Total Mass (grams)',
+      title: <FormattedMessage id="calculator.totalMass" defaultMessage="Total Mass (grams)" />,
       dataIndex: 'totalMass',
       valueType: 'digit',
     },
     {
-      title: 'Options',
+      title: <FormattedMessage id="calculator.option" defaultMessage="Option" />,
       valueType: 'option',
       render: (text, record, _, action) => [
         <a
@@ -105,7 +108,7 @@ const Parts: FC<Props> = ({ supply }) => {
             action?.startEditable?.(record.id);
           }}
         >
-          edit
+          <FormattedMessage id="calculator.edit" defaultMessage="Edit" />
         </a>,
       ],
     },
@@ -154,7 +157,7 @@ const Parts: FC<Props> = ({ supply }) => {
                 });
               }}
             >
-              Supply
+              <FormattedMessage id="calculator.supply" defaultMessage="Supply" />
             </Button>
           </>,
         ]}
