@@ -1,6 +1,5 @@
 import type { Project } from '@/services/data';
 import { getResult } from '@/services/result/api';
-import styles from '@/style/custom.less';
 import { Treemap } from '@ant-design/charts';
 import { ProCard } from '@ant-design/pro-components';
 import { Spin } from 'antd';
@@ -17,7 +16,7 @@ const Result: FC<Props> = ({ projectData }) => {
   useEffect(() => {
     if (projectData.projectName && projectData.projectName.trim().length > 0) {
       setRoseChart(
-        <div className={styles.loading_spin_div}>
+        <div className="loading_spin_div">
           <Spin />
         </div>,
       );

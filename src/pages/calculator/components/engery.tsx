@@ -1,30 +1,43 @@
 import { getElectricitySourceSelectItems } from '@/services/factorElectricity/api';
-import { ProCard, ProFormDigit, ProFormSelect, ProFormText } from '@ant-design/pro-components';
+import { ProFormDigit, ProFormSelect, ProFormText } from '@ant-design/pro-components';
+import { Divider } from 'antd';
 
 const Engery = () => {
   const electricitySourceSelectItems = async () => getElectricitySourceSelectItems();
   return (
     <>
-      <ProCard hoverable bordered>
-        <ProFormText name="location" label="Location" width="md" placeholder="Enter" />
-        <ProFormSelect
-          name="electricitySource"
-          label="Electricity Source"
-          width="md"
-          request={electricitySourceSelectItems}
-        />
-        <ProFormDigit width="md" name="electricity" label="Electricity" placeholder="0" />
-        <ProFormText name="ratio" label="Ratio" width="md" placeholder="Enter" />
-      </ProCard>
+      <ProFormText
+        name="location"
+        label="Location"
+        style={{ width: '100%', minWidth: '100px' }}
+        placeholder="Enter"
+      />
+      <ProFormSelect
+        name="electricitySource"
+        label="Electricity Source"
+        style={{ width: '100%', minWidth: '100px' }}
+        request={electricitySourceSelectItems}
+      />
+      <ProFormDigit
+        style={{ width: '100%', minWidth: '100px' }}
+        name="electricity"
+        label="Electricity"
+        placeholder="0"
+      />
+      <ProFormText
+        name="ratio"
+        label="Ratio"
+        style={{ width: '100%', minWidth: '100px' }}
+        placeholder="Enter"
+      />
 
-      <ProCard hoverable bordered>
-        <ProFormText
-          name="manufactureCo2e"
-          label="CO2-e in manufacture"
-          width="md"
-          placeholder="Enter"
-        />
-      </ProCard>
+      <Divider />
+      <ProFormText
+        name="manufactureCo2e"
+        label="CO2-e in manufacture"
+        style={{ width: '100%', minWidth: '100px' }}
+        placeholder="Enter"
+      />
     </>
   );
 };

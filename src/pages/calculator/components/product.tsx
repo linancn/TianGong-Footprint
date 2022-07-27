@@ -6,7 +6,7 @@ const Product = () => {
       <ProFormText
         name="projectName"
         label="PRODUCT NAME"
-        width="md"
+        style={{ width: '100%', minWidth: '100px' }}
         placeholder="Enter"
         rules={[{ required: true }]}
       />

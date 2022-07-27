@@ -10,6 +10,8 @@ import Parts from './components/parts';
 import Product from './components/product';
 import Result from './components/result';
 
+import '@/style/custom.css';
+
 const baseData: Project = {
   projectName: '',
   // totalProductWeignt: 0,
@@ -164,35 +166,22 @@ const Calculator = () => {
 
   return (
     <>
-      <ProCard bodyStyle={cardHidden ? { display: 'none' } : {}}>
+      <ProCard bodyStyle={cardHidden ? { display: 'none' } : { paddingBottom: '40px' }}>
         <StepsForm
           formMapRef={formMapRef}
           onFinish={(values: any) => {
             setProjectData(values);
             setCardHidden(true);
             return Promise.resolve(false);
-            // const ss: Supply[] = [];
-            // const result: Project = { supply: [] };
-            // for (const v in values) {
-            //   if (v === 'supply') {
-            //     values[v].forEach((ele: Supply) => {
-            //       ele.processing =
-            //         values['process' + ele.id] === undefined ? [] : values['process' + ele.id];
-            //       ele.transportation =
-            //         values['transportation' + ele.id] === undefined
-            //           ? []
-            //           : values['transportation' + ele.id];
-            //       ss.push(ele);
-            //     });
-            //   } else if (v.indexOf('process') === -1 && v.indexOf('transportation') === -1) {
-            //     result[v] = values[v];
-            //   }
-            // }
-            // result.supply = ss;
           }}
           formProps={{
             validateMessages: {
               required: '此项为必填项',
+            },
+          }}
+          submitter={{
+            render: (props, doms) => {
+              return <div className="step_button">{doms}</div>;
             },
           }}
         >
