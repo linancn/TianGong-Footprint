@@ -128,6 +128,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
           <>
             <Button
               size={'middle'}
+              className="button_right"
               type="primary"
               icon={<PlusOutlined />}
               onClick={() => {

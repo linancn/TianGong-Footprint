@@ -142,6 +142,7 @@ const Parts: FC<Props> = ({ supply }) => {
           <>
             <Button
               size={'middle'}
+              className="button_right"
               type="primary"
               icon={<PlusOutlined />}
               onClick={() => {

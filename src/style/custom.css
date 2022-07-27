@@ -1,3 +1,10 @@
+.ant-space-align-center,
+.ant-space-item {
+  width: 100%;
+  min-height: 16px;
+  text-align: center;
+}
+
 .loading_spin_div {
   margin: 20px 0;
   margin-bottom: 20px;
@@ -8,13 +15,16 @@
 }
 
 .step_button {
-  position: fixed;
-  right: 0;
-  left: 0;
-  width: 250px;
+  width: 100%;
   margin: 0 auto;
+  text-align: center;
 }
 
 .step_button button {
   margin: 0 15px;
+}
+
+.button_right {
+  position: absolute;
+  right: 0;
 }

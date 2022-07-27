@@ -168,7 +168,7 @@ const Calculator = () => {
 
   return (
     <>
-      <ProCard bodyStyle={cardHidden ? { display: 'none' } : { paddingBottom: '40px' }}>
+      <ProCard bodyStyle={cardHidden ? { display: 'none' } : {}}>
         <StepsForm
           formMapRef={formMapRef}
           onFinish={(values: any) => {

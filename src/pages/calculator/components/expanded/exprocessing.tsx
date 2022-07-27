@@ -122,6 +122,7 @@ const Exprocessing: FC<Props> = ({
           <>
             <Button
               size={'middle'}
+              className="button_right"
               type="primary"
               icon={<PlusOutlined />}
               onClick={() => {
@@ -134,7 +135,7 @@ const Exprocessing: FC<Props> = ({
                 });
               }}
             >
-              <FormattedMessage id="calculator.processing" defaultMessage="Processing" />,
+              <FormattedMessage id="calculator.processing" defaultMessage="Processing" />
             </Button>
           </>,
         ]}
