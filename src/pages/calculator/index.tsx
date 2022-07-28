@@ -201,6 +201,7 @@ const Calculator = () => {
           </StepsForm.StepForm>
           <StepsForm.StepForm
             name="step2"
+            style={{ width: '1160px' }}
             title={intl.formatMessage({
               id: 'calculator.upstreamupply',
               defaultMessage: 'Upstream supply',
@@ -219,6 +220,7 @@ const Calculator = () => {
           </StepsForm.StepForm>
           <StepsForm.StepForm
             name="step4"
+            style={{ width: '1160px' }}
             title={intl.formatMessage({
               id: 'calculator.distribution',
               defaultMessage: 'Distribution',
