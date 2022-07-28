@@ -36,7 +36,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
 
   const Transportationcolumns: ProColumns<Transportation>[] = [
     {
-      title: <FormattedMessage id="calculator.transportation" defaultMessage="Transportation" />,
+      title: <FormattedMessage id="calculator.index" defaultMessage="No." />,
       dataIndex: 'index',
       valueType: 'index',
     },
@@ -98,6 +98,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
     <>
       <EditableProTable<Transportation>
         rowKey="id"
+        headerTitle="Transportation"
         name={'transportation' + supplyid}
         // recordCreatorProps={{
         //   newRecordType: 'dataSource',
@@ -127,9 +128,10 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
         toolBarRender={() => [
           <>
             <Button
-              size={'middle'}
+              size={'small'}
               className="button_right"
               type="primary"
+              ghost
               icon={<PlusOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
@@ -141,7 +143,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
                 });
               }}
             >
-              <FormattedMessage id="calculator.transportation" defaultMessage="Transportation" />
+              <FormattedMessage id="calculator.add" defaultMessage="  Add" />
             </Button>
           </>,
         ]}

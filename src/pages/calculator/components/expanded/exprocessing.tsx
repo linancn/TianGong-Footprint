@@ -43,7 +43,7 @@ const Exprocessing: FC<Props> = ({
 
   const Processingcolumns: ProColumns<Processing>[] = [
     {
-      title: <FormattedMessage id="calculator.processing" defaultMessage="Processing" />,
+      title: <FormattedMessage id="calculator.index" defaultMessage="No." />,
       dataIndex: 'index',
       valueType: 'index',
     },
@@ -92,6 +92,7 @@ const Exprocessing: FC<Props> = ({
     <>
       <EditableProTable<Processing>
         rowKey="id"
+        headerTitle="Processing"
         name={'process' + supplyId}
         // recordCreatorProps={{
         //   newRecordType: 'dataSource',
@@ -121,9 +122,10 @@ const Exprocessing: FC<Props> = ({
         toolBarRender={() => [
           <>
             <Button
-              size={'middle'}
+              size={'small'}
               className="button_right"
               type="primary"
+              ghost
               icon={<PlusOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
@@ -135,7 +137,7 @@ const Exprocessing: FC<Props> = ({
                 });
               }}
             >
-              <FormattedMessage id="calculator.processing" defaultMessage="Processing" />
+              <FormattedMessage id="calculator.add" defaultMessage="  Add" />
             </Button>
           </>,
         ]}

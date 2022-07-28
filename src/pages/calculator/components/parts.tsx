@@ -53,7 +53,7 @@ const Parts: FC<Props> = ({ supply }) => {
 
   const columns: ProColumns<Supply>[] = [
     {
-      title: <FormattedMessage id="calculator.index" defaultMessage="NO" />,
+      title: <FormattedMessage id="calculator.index" defaultMessage="No." />,
       dataIndex: 'index',
       valueType: 'index',
     },
@@ -118,6 +118,7 @@ const Parts: FC<Props> = ({ supply }) => {
     <>
       <EditableProTable<Supply>
         rowKey="id"
+        headerTitle="Parts/Material"
         actionRef={actionRef}
         // 关闭默认的新建按钮
         recordCreatorProps={false}
@@ -158,7 +159,7 @@ const Parts: FC<Props> = ({ supply }) => {
                 });
               }}
             >
-              <FormattedMessage id="calculator.supply" defaultMessage="Supply" />
+              <FormattedMessage id="calculator.add" defaultMessage="  Add" />
             </Button>
           </>,
         ]}

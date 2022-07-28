@@ -21,6 +21,7 @@
 }
 
 .step_button button {
+  width: 85px;
   margin: 0 15px;
 }
 

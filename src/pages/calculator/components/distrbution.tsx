@@ -27,7 +27,7 @@ const Distribution: FC<Props> = ({ destination }) => {
 
   const columns: ProColumns<Destination>[] = [
     {
-      title: <FormattedMessage id="calculator.index" defaultMessage="NO" />,
+      title: <FormattedMessage id="calculator.index" defaultMessage="No." />,
       dataIndex: 'index',
       valueType: 'index',
     },
@@ -92,6 +92,7 @@ const Distribution: FC<Props> = ({ destination }) => {
     <>
       <EditableProTable<Destination>
         rowKey="id"
+        headerTitle="Downstream distribution"
         actionRef={actionRef}
         // 关闭默认的新建按钮
         recordCreatorProps={false}

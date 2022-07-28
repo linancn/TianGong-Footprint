@@ -42,7 +42,7 @@ const Engery = () => {
         name="ratio"
         label={intl.formatMessage({
           id: 'calculator.ratio',
-          defaultMessage: 'Ratio',
+          defaultMessage: 'Ratio (%)',
         })}
         style={{ width: '100%', minWidth: '100px' }}
         placeholder={intl.formatMessage({
