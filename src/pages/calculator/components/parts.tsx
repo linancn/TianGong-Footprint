@@ -133,6 +133,12 @@ const Parts: FC<Props> = ({ supply }) => {
           type: 'multiple',
           editableKeys,
           actionRender: (_row, _config, dom) => [dom.delete],
+          deletePopconfirmMessage: (
+            <FormattedMessage
+              id="calculator.isDelete"
+              defaultMessage="Are you sure this line delete?"
+            />
+          ),
           onChange: setEditableRowKeys,
         }}
         expandable={{

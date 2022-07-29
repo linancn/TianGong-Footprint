@@ -32,4 +32,5 @@ export default {
   'calculator.transportation': '运输',
   'calculator.transportMode': '交通工具',
   'calculator.upstreamupply': '上游供应',
+  'calculator.isDelete': '确认删除此行？',
 };

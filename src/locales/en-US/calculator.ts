@@ -32,4 +32,5 @@ export default {
   'calculator.supplierLocation': 'Supplier location',
   'calculator.index': 'No.',
   'calculator.add': ' Add',
+  'calculator.isDelete': 'Are you sure delete this line?',
 };

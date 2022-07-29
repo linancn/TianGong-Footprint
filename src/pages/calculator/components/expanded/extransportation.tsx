@@ -123,6 +123,12 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
           type: 'multiple',
           editableKeys,
           actionRender: (row, config, dom) => [dom.delete],
+          deletePopconfirmMessage: (
+            <FormattedMessage
+              id="calculator.isDelete"
+              defaultMessage="Are you sure this line delete?"
+            />
+          ),
           onChange: setEditableRowKeys,
         }}
         toolBarRender={() => [

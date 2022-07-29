@@ -32,4 +32,5 @@ export default {
   'calculator.transportation': '',
   'calculator.transportMode': '交通手段',
   'calculator.upstreamupply': 'アップストリーム供給',
+  'calculator.isDelete': 'Are you sure delete this line?',
 };
