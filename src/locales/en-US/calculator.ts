@@ -31,5 +31,5 @@ export default {
   'calculator.supplierPercentage': 'Supplier percentage (%)',
   'calculator.supplierLocation': 'Supplier location',
   'calculator.index': 'No.',
-  'calculator.add': '  Add',
+  'calculator.add': ' Add',
 };

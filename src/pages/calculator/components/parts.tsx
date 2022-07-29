@@ -1,6 +1,6 @@
 import type { Supply } from '@/services/data';
 import { getMaterialCategorySelectItems } from '@/services/factorMaterial/api';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircleFilled } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
@@ -145,7 +145,7 @@ const Parts: FC<Props> = ({ supply }) => {
               size={'middle'}
               className="button_right"
               type="primary"
-              icon={<PlusOutlined />}
+              icon={<PlusCircleFilled />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
                   id: uuidv4(),
@@ -159,7 +159,7 @@ const Parts: FC<Props> = ({ supply }) => {
                 });
               }}
             >
-              <FormattedMessage id="calculator.add" defaultMessage="  Add" />
+              <FormattedMessage id="calculator.add" defaultMessage=" Add" />
             </Button>
           </>,
         ]}

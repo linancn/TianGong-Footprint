@@ -1,7 +1,7 @@
 import { waitTime } from '@/helper/waitTime';
 import type { Transportation } from '@/services/data';
 import { getTransportModeSelectItems } from '@/services/factorTransportation/api';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
@@ -132,7 +132,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
               className="button_right"
               type="primary"
               ghost
-              icon={<PlusOutlined />}
+              icon={<PlusCircleOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
                   id: uuidv4(),
@@ -143,7 +143,7 @@ const Extransportation: FC<Props> = ({ supplyid, transportation }) => {
                 });
               }}
             >
-              <FormattedMessage id="calculator.add" defaultMessage="  Add" />
+              <FormattedMessage id="calculator.add" defaultMessage=" Add" />
             </Button>
           </>,
         ]}

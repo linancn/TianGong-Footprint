@@ -1,6 +1,6 @@
 import type { Destination } from '@/services/data';
 import { getTransportModeSelectItems } from '@/services/factorTransportation/api';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircleFilled } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
@@ -116,7 +116,7 @@ const Distribution: FC<Props> = ({ destination }) => {
               size={'middle'}
               className="button_right"
               type="primary"
-              icon={<PlusOutlined />}
+              icon={<PlusCircleFilled />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
                   id: uuidv4(),

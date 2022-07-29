@@ -1,6 +1,6 @@
 import { waitTime } from '@/helper/waitTime';
 import type { Processing } from '@/services/data';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
@@ -126,7 +126,7 @@ const Exprocessing: FC<Props> = ({
               className="button_right"
               type="primary"
               ghost
-              icon={<PlusOutlined />}
+              icon={<PlusCircleOutlined />}
               onClick={() => {
                 actionRef.current?.addEditRecord?.({
                   id: uuidv4(),
@@ -137,7 +137,7 @@ const Exprocessing: FC<Props> = ({
                 });
               }}
             >
-              <FormattedMessage id="calculator.add" defaultMessage="  Add" />
+              <FormattedMessage id="calculator.add" defaultMessage=" Add" />
             </Button>
           </>,
         ]}
